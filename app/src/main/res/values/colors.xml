@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Gray -->
+    <color name="Gray_600">#000000</color>
+    <color name="Gray_500">#474646</color>
+    <color name="Gray_400">#A8A8A8</color>
+    <color name="Gray_300">#CCCACA</color>
+    <color name="Gray_200">#E6E4E4</color>
+    <color name="Gray_100">#F5F6F6</color>
+    <color name="Gray_50">#FFFFFF</color>
+
+    <!-- Pink -->
+    <color name="Pink_100">#FFD1DF</color>
+    <color name="Pink_200">#FFC9D9</color>
+    <color name="Pink_300">#FF97B6</color>
+    <color name="Pink_400">#FF6593</color>
+    <color name="Pink_500">#FF2868</color>
+
+    <!-- Green -->
+    <color name="Green_400">#00C472</color>
+    <color name="Green_300">#5FCA7B</color>
+    <color name="Green_200">#A0E5C8</color>
+    <color name="Green_100">#EDFFF1</color>
+
+    <!-- Red -->
+    <color name="Error">#FF2633</color>
+
+    <!-- Orange -->
+    <color name="Orange">#FF9466</color>
+
+    <!-- Blue -->
+    <color name="Blue">#779EDA</color>
+
 </resources>
