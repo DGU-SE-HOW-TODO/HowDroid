@@ -3,49 +3,49 @@
     <!-- Title -->
     <style name="Headline">
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">24dp</item>
     </style>
 
     <style name="Title1">
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16dp</item>
     </style>
 
     <style name="Subtitle">
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">15dp</item>
     </style>
 
     <!-- Body -->
     <style name="Body_B1">
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">14dp</item>
     </style>
 
     <style name="Body_B2">
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">13dp</item>
     </style>
 
     <style name="Body_M1">
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">15dp</item>
     </style>
 
     <style name="Body_M2">
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">13dp</item>
     </style>
 
     <!-- Caption -->
     <style name="Caption1">
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">12dp</item>
     </style>
 
     <style name="Caption2">
         <item name="fontFamily">@font/pretendard_medium</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">11dp</item>
     </style>
 
 </resources>

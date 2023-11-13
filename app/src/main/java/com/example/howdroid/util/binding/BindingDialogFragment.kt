@@ -50,7 +50,7 @@ abstract class BindingDialogFragment<B : ViewDataBinding>(
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
 }
