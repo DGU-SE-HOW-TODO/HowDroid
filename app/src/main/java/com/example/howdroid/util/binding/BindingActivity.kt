@@ -19,6 +19,8 @@ abstract class BindingActivity<T : ViewDataBinding>(
         binding.lifecycleOwner = this
     }
 
+
+
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         hideKeyboard(currentFocus ?: View(this))
         return super.dispatchTouchEvent(ev)
