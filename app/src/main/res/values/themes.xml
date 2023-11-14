@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.HowDroid" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.HowDroid" parent="Theme.Material3.Light.NoActionBar">
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/Gray_50</item>
         <item name="android:windowLightStatusBar">true</item>
