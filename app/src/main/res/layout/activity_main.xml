@@ -5,12 +5,48 @@
 
     <data>
 
+        <variable
+            name="priorityType"
+            type="com.example.howdroid.presentation.PriorityType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".HowApplication">
+
+
+        <com.example.howdroid.presentation.CustomPriorityChip
+            android:id="@+id/custom_chip_most_important"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:selectedBackgroundResource="@drawable/background_priority_most_important_selected"
+            app:selectedColor="@color/Orange"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:name="매우중요" />
+
+        <com.example.howdroid.presentation.CustomPriorityChip
+            android:id="@+id/custom_chip_important"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:selectedBackgroundResource="@drawable/background_priority_important_selected"
+            app:selectedColor="@color/Green_400"
+            app:layout_constraintStart_toEndOf="@+id/custom_chip_most_important"
+            app:layout_constraintTop_toTopOf="@+id/custom_chip_most_important"
+            app:name="중요" />
+
+        <com.example.howdroid.presentation.CustomPriorityChip
+            android:id="@+id/custom_chip_not_important"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:selectedBackgroundResource="@drawable/background_priority_not_improtant_selected"
+            app:selectedColor="@color/Blue"
+            app:layout_constraintStart_toEndOf="@+id/custom_chip_important"
+            app:layout_constraintTop_toTopOf="@+id/custom_chip_important"
+            app:name="중요하지않음" />
 
         <TextView
             android:layout_width="wrap_content"
