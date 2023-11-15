@@ -32,7 +32,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Lint Check
-        run: ./gradlew ktlintCheck
+        run: ./gradlew ktlintCheck -PcompileSdkVersion=34
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew build -PcompileSdkVersion=34
