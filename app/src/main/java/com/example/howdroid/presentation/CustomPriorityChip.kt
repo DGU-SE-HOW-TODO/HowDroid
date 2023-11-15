@@ -12,7 +12,8 @@ import com.example.howdroid.R
 import com.example.howdroid.databinding.ViewPriorityChipBinding
 
 class CustomPriorityChip(
-    context: Context, attrs: AttributeSet
+    context: Context,
+    attrs: AttributeSet
 ) : ConstraintLayout(context, attrs) {
     private var binding: ViewPriorityChipBinding =
         ViewPriorityChipBinding.inflate(LayoutInflater.from(context), this, true)
