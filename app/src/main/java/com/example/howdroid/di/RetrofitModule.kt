@@ -1,6 +1,5 @@
 package com.example.howdroid.di
 
-import com.example.howdroid.BuildConfig.BASE_URL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -59,7 +58,7 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun providesAuthRetrofit(okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient).addConverterFactory(
+        Retrofit.Builder().baseUrl("BASE_URL").client(okHttpClient).addConverterFactory(
             Json.asConverterFactory("application/json".toMediaType()),
         ).build()
 }
