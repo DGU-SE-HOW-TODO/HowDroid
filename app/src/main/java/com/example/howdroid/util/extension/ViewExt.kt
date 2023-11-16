@@ -12,6 +12,10 @@ fun showSnackbar(view: View, message: String, isShort: Boolean = true) {
     Snackbar.make(view, message, duration).show()
 }
 
+fun View.setVisible(visibility: Int) {
+    this.visibility = visibility
+}
+
 inline fun View.setOnSingleClickListener(
     delay: Long = 500L,
     crossinline block: (View) -> Unit,
