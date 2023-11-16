@@ -51,6 +51,9 @@
                 android:layout_marginTop="9dp"
                 android:background="@drawable/bg_edittext_input"
                 android:hint="@string/signup_email_hint"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
                 android:paddingVertical="14dp"
                 android:paddingStart="19dp"
                 android:textColor="@color/Gray_400"
@@ -114,6 +117,9 @@
                 android:layout_marginTop="9dp"
                 android:background="@drawable/bg_edittext_input"
                 android:hint="@string/signup_nickname_hint"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
                 android:paddingVertical="14dp"
                 android:paddingStart="19dp"
                 android:textColor="@color/Gray_400"
@@ -162,6 +168,9 @@
                 android:layout_marginTop="9dp"
                 android:background="@drawable/bg_edittext_input"
                 android:hint="@string/signup_password_hint"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:maxLines="1"
                 android:paddingVertical="14dp"
                 android:paddingStart="19dp"
                 android:textColor="@color/Gray_400"
@@ -202,6 +211,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
+
                 android:id="@+id/et_signup_password_check"
                 style="@style/Body_M1"
                 android:layout_width="match_parent"
@@ -210,6 +220,9 @@
                 android:layout_marginTop="9dp"
                 android:background="@drawable/bg_edittext_input"
                 android:hint="@string/signup_password_check_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"
                 android:paddingVertical="14dp"
                 android:paddingStart="19dp"
                 android:textColor="@color/Gray_400"
