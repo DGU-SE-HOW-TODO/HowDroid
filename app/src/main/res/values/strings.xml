@@ -25,4 +25,13 @@
     <string name="signup_password_check_hint">비밀번호를 확인해주세요</string>
     <string name="signup_password_check_message">비밀번호가 일치하지 않습니다</string>
     <string name="signup_btn">가입완료</string>
+
+    <!--  calendar  -->
+    <string name="calendar_week_description_mon">월</string>
+    <string name="calendar_week_description_tue">화</string>
+    <string name="calendar_week_description_wed">수</string>
+    <string name="calendar_week_description_thu">목</string>
+    <string name="calendar_week_description_fri">금</string>
+    <string name="calendar_week_description_sat">토</string>
+    <string name="calendar_week_description_sun">일</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.howdroid.presentation
+package com.example.howdroid.presentation.home
 
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController

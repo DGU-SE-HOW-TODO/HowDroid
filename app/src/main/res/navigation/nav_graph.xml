@@ -5,7 +5,7 @@
     app:startDestination="@id/navigation_home">
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.howdroid.presentation.HomeFragment"
+        android:name="com.example.howdroid.presentation.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/navigation_chart"
