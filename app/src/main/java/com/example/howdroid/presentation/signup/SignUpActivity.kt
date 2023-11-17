@@ -66,7 +66,7 @@ class SignUpActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_
             password = etSignupPassword.text.toString()
             passwordCheck = etSignupPasswordCheck.text.toString()
 
-            signUpViewModel.setSignUpLiveData(email, nickName, password, passwordCheck)
+            signUpViewModel.setSignUpState(email, nickName, password, passwordCheck)
         }
     }
 }
