@@ -33,7 +33,7 @@
             android:layout_marginVertical="24dp"
             android:layout_marginStart="14dp"
             android:text="@{title}"
-            android:textAppearance="@style/Subtitle"
+            android:textAppearance="@style/Title1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_toolbar_back"
             app:layout_constraintTop_toTopOf="parent"
