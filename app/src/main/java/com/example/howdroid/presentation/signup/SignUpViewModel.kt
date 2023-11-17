@@ -23,7 +23,7 @@ class SignUpViewModel : ViewModel() {
     private val _isButtonEnabled = MutableLiveData<Boolean>()
     val isButtonEnabled: LiveData<Boolean> = _isButtonEnabled
 
-    fun setSignUpLiveData(
+    fun setSignUpState(
         email: String,
         nickName: String,
         password: String,
