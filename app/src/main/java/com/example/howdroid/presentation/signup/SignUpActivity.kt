@@ -54,7 +54,7 @@ class SignUpActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_
                 is UiState.Success -> setVisible(INVISIBLE)
                 is UiState.Failure -> setVisible(VISIBLE)
                 is UiState.Empty -> setVisible(INVISIBLE)
-                else -> {}
+                else -> Unit
             }
         }
     }
