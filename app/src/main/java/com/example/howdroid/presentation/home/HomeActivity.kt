@@ -6,7 +6,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.howdroid.R
 import com.example.howdroid.databinding.ActivityHomeBinding
 import com.example.howdroid.util.binding.BindingActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

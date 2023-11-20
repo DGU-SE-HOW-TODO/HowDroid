@@ -34,4 +34,7 @@
     <string name="calendar_week_description_fri">금</string>
     <string name="calendar_week_description_sat">토</string>
     <string name="calendar_week_description_sun">일</string>
+    <string name="home_categoty_add">대분류 추가</string>
+    <string name="home_add_category_hint">입력하기</string>
+    <string name="home_add_category">+</string>
 </resources>
