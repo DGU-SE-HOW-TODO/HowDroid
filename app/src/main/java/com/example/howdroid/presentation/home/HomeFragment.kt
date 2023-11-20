@@ -9,22 +9,29 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.example.howdroid.R
 import com.example.howdroid.databinding.FragmentHomeBinding
+import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.util.binding.BindingFragment
 import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.example.howdroid.util.extension.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+class HomeFragment :
+    BindingFragment<FragmentHomeBinding>(R.layout.fragment_home),
+    TodoOptionClickListener {
 
     private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setHome()
         setHomeTitle()
         addCategory()
+    }
+
+    override fun onOptionClick(todoItem: Home.TodoItem) {
+        val bottomSheetFragment = HomeBottomSheetFragment(todoItem)
+        bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
     }
 
     private fun addCategory() {
@@ -37,9 +44,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private fun setHome() {
         homeViewModel.homeData.observe(viewLifecycleOwner) { homeData ->
-            val adapter = HomeTodoOuterAdapter()
-            binding.rvOuterHomeTodoList.adapter = adapter
-            adapter.submitList(homeData)
+            val outerAdapter = HomeTodoOuterAdapter(this)
+            binding.rvOuterHomeTodoList.adapter = outerAdapter
+            outerAdapter.submitList(homeData)
         }
 
         homeViewModel.getHomeData()
