@@ -9,8 +9,8 @@ import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.util.extension.ItemDiffCallback
 
 class HomeTodoOuterAdapter() :
-    ListAdapter<Home, HomeTodoOuterAdapter.HomeTodoOuterViewHolder>(
-        ItemDiffCallback<Home>(
+    ListAdapter<Home.TodoCategory, HomeTodoOuterAdapter.HomeTodoOuterViewHolder>(
+        ItemDiffCallback<Home.TodoCategory>(
             onItemsTheSame = { old, new -> old == new },
             onContentsTheSame = { old, new -> old == new },
         ),
@@ -29,12 +29,11 @@ class HomeTodoOuterAdapter() :
     inner class HomeTodoOuterViewHolder(private val binding: ItemOuterHomeTodoListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(home: Home) {
-            binding.tvHomeCategoryTitle.text =
-                home.todoCategoryData[absoluteAdapterPosition].todoCategory
+        fun onBind(home: Home.TodoCategory) {
+            binding.tvHomeCategoryTitle.text = home.todoCategory
 
             binding.rvInnerHomeTodoList.adapter = HomeTodoInnerAdapter().apply {
-                submitList(home.todoCategoryData[absoluteAdapterPosition].todoData)
+                submitList(home.todoData)
             }
         }
     }

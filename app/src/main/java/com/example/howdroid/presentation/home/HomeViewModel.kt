@@ -13,10 +13,10 @@ class HomeViewModel @Inject constructor() : ViewModel() {
 
     private val homeMockData = HomeMockData()
 
-    private val _homeData = MutableLiveData<List<Home>>()
-    val homeData: LiveData<List<Home>> get() = _homeData
+    private val _homeData = MutableLiveData<List<Home.TodoCategory>>()
+    val homeData: LiveData<List<Home.TodoCategory>> get() = _homeData
 
     fun getHomeData() {
-        _homeData.value = listOf(homeMockData.mockHomeData)
+        _homeData.value = homeMockData.mockHomeData.todoCategoryData
     }
 }

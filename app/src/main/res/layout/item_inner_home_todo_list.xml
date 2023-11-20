@@ -35,11 +35,15 @@
         <TextView
             android:id="@+id/tv_home_todo_title"
             style="@style/Body_M1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:textColor="@color/Gray_600"
             app:layout_constraintBottom_toBottomOf="@+id/view_home_todo"
+            app:layout_constraintEnd_toStartOf="@+id/iv_home_todo_option"
             app:layout_constraintStart_toEndOf="@id/view_home_todo"
             app:layout_constraintTop_toTopOf="@+id/view_home_todo"
             tools:text="소공 공부하기" />
