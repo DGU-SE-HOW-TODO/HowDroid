@@ -40,4 +40,6 @@
     <string name="home_add_category_hint">입력하기</string>
     <string name="home_add_category">+</string>
     <string name="home_title">오늘 할 일 %d% 달성</string>
+    <string name="home_todo_detail_todo_fix">📌 TO DO 고정하기</string>
+    <string name="home_todo_detail_failtag">🏷️ 실패 태그 달기</string>
 </resources>
