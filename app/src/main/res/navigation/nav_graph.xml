@@ -9,7 +9,7 @@
         android:label="HomeFragment"></fragment>
     <fragment
         android:id="@+id/navigation_chart"
-        android:name="com.example.howdroid.presentation.ChartFragment"
+        android:name="com.example.howdroid.presentation.chart.ChartFragment"
         android:label="ChartFragment" />
     <fragment
         android:id="@+id/navigation_mypage"
