@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/Gray_100">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/view_toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/add_todo_toolbar_title}" />
+
+        <TextView
+            android:id="@+id/tv_add_todo_title"
+            style="@style/Body_B1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="38dp"
+            android:text="@string/add_todo_title"
+            android:textColor="@color/Gray_500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
+
+        <EditText
+            android:id="@+id/et_add_todo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_add_todo"
+            android:hint="@string/add_todo_hint"
+            android:inputType="text"
+            android:paddingVertical="16dp"
+            android:paddingStart="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_add_todo_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_add_todo_title" />
+
+        <TextView
+            android:id="@+id/tv_add_todo_error_message"
+            style="@style/Caption2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/add_todo_hint"
+            android:textColor="@color/Pink_500"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/et_add_todo"
+            app:layout_constraintTop_toBottomOf="@+id/et_add_todo" />
+
+        <TextView
+            android:id="@+id/tv_add_todo_priority"
+            style="@style/Body_B1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
+            android:text="@string/add_todo_priority_title"
+            android:textColor="@color/Gray_500"
+            app:layout_constraintStart_toStartOf="@id/et_add_todo"
+            app:layout_constraintTop_toBottomOf="@+id/et_add_todo" />
+
+        <com.example.howdroid.presentation.CustomPriorityChip
+            android:id="@+id/custom_chip_most_important"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_add_todo_priority"
+            app:layout_constraintTop_toBottomOf="@id/tv_add_todo_priority"
+            app:name="매우중요"
+            app:selectedBackgroundResource="@drawable/background_priority_most_important_selected"
+            app:selectedColor="@color/Orange" />
+
+        <com.example.howdroid.presentation.CustomPriorityChip
+            android:id="@+id/custom_chip_important"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            app:layout_constraintStart_toEndOf="@+id/custom_chip_most_important"
+            app:layout_constraintTop_toTopOf="@+id/custom_chip_most_important"
+            app:name="중요"
+            app:selectedBackgroundResource="@drawable/background_priority_important_selected"
+            app:selectedColor="@color/Green_400" />
+
+        <com.example.howdroid.presentation.CustomPriorityChip
+            android:id="@+id/custom_chip_not_important"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            app:layout_constraintStart_toEndOf="@+id/custom_chip_important"
+            app:layout_constraintTop_toTopOf="@+id/custom_chip_important"
+            app:name="중요하지않음"
+            app:selectedBackgroundResource="@drawable/background_priority_not_improtant_selected"
+            app:selectedColor="@color/Blue" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add_todo_done"
+            style="@style/Body_M1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/bg_btn"
+            android:enabled="false"
+            android:text="@string/add_todo_done"
+            android:textColor="@color/Gray_50"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
