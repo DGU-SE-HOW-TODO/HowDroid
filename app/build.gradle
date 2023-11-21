@@ -85,6 +85,9 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
 
+    // chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     implementation 'androidx.core:core-ktx:1.10.1'
 
     implementation 'androidx.core:core-ktx:1.8.0'
