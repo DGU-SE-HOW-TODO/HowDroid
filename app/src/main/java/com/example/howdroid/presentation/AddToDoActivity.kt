@@ -26,19 +26,11 @@ class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activit
 
         observeLiveData()
         setTextChangeListeners()
+        setPriorityType()
+        observePriorityType()
+    }
 
-        binding.customChipMostImportant.setOnClickListener {
-            addToDoViewModel.setSelectedPriorityType(PriorityType.MOST_IMPORTANT)
-        }
-
-        binding.customChipImportant.setOnClickListener {
-            addToDoViewModel.setSelectedPriorityType(PriorityType.IMPORTANT)
-        }
-
-        binding.customChipNotImportant.setOnClickListener {
-            addToDoViewModel.setSelectedPriorityType(PriorityType.NOT_IMPORTANT)
-        }
-
+    private fun observePriorityType() {
         addToDoViewModel.priorityType.flowWithLifecycle(lifecycle).onEach { priorityType ->
             with(binding) {
                 when (priorityType) {
@@ -67,6 +59,20 @@ class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activit
                 customChipNotImportant.updateViewColor()
             }
         }.launchIn(lifecycleScope)
+    }
+
+    private fun setPriorityType() {
+        binding.customChipMostImportant.setOnClickListener {
+            addToDoViewModel.setSelectedPriorityType(PriorityType.MOST_IMPORTANT)
+        }
+
+        binding.customChipImportant.setOnClickListener {
+            addToDoViewModel.setSelectedPriorityType(PriorityType.IMPORTANT)
+        }
+
+        binding.customChipNotImportant.setOnClickListener {
+            addToDoViewModel.setSelectedPriorityType(PriorityType.NOT_IMPORTANT)
+        }
     }
 
     private fun observeLiveData() {
