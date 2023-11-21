@@ -72,6 +72,6 @@ class SignUpViewModel : ViewModel() {
 
     companion object {
         private const val PASSWORD_REGEX = ".*[a-zA-Z]+.*[0-9]+.*"
-        private const val INVALID_STRING = "invalid"
+        const val INVALID_STRING = "invalid"
     }
 }

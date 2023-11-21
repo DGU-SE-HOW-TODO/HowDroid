@@ -43,6 +43,13 @@
     <string name="home_todo_detail_todo_fix">📌 TO DO 고정하기</string>
     <string name="home_todo_detail_failtag">🏷️ 실패 태그 달기</string>
 
+    <!--  addToDO  -->
+    <string name="add_todo_toolbar_title">TODO 생성</string>
+    <string name="add_todo_title">나의 TODO를 생성해 볼까요?</string>
+    <string name="add_todo_hint">15자 이하로 입력해 주세요</string>
+    <string name="add_todo_priority_title">우선 순위를 정해볼까요?</string>
+    <string name="add_todo_done">완료</string>
+
     <!--  failTag  -->
     <string name="my_fail_tag_title">나만의 실패 태그 만들기</string>
     <string name="my_fail_tag_sleep">잠</string>

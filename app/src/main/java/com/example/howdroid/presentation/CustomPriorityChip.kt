@@ -13,7 +13,7 @@ import com.example.howdroid.databinding.ViewPriorityChipBinding
 
 class CustomPriorityChip(
     context: Context,
-    attrs: AttributeSet
+    attrs: AttributeSet,
 ) : ConstraintLayout(context, attrs) {
     private var binding: ViewPriorityChipBinding =
         ViewPriorityChipBinding.inflate(LayoutInflater.from(context), this, true)
@@ -28,7 +28,8 @@ class CustomPriorityChip(
         val typedArray = context.obtainStyledAttributes(
             attrs,
             R.styleable.priorityChip,
-            0, 0
+            0,
+            0,
         )
         initView(typedArray)
     }
@@ -53,7 +54,7 @@ class CustomPriorityChip(
 
     fun updateViewColor() {
         binding.tvPriorityChip.setTextColor(
-            if (isSelected) circleColor else context.getColor(R.color.Gray_400)
+            if (isSelected) circleColor else context.getColor(R.color.Gray_400),
         )
         binding.root.background =
             if (isSelected) selectedBackgroundDrawable else context.getDrawable(R.drawable.background_priority_unselected)
