@@ -1,6 +1,7 @@
 package com.example.howdroid.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -23,6 +24,8 @@ class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d("aaa", "불러는옴")
 
         observeLiveData()
         setTextChangeListeners()
