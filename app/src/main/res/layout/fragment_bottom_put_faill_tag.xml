@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_sheet">
+
+        <View
+            android:id="@+id/view_put_fail_tag"
+            android:layout_width="35dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/shape_gray_fill_8_rect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_put_fail_tag_title"
+            style="@style/Body_B1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="@string/put_fail_tag_title"
+            android:textColor="@color/Gray_600"
+            app:layout_constraintEnd_toEndOf="@+id/view_put_fail_tag"
+            app:layout_constraintStart_toStartOf="@+id/view_put_fail_tag"
+            app:layout_constraintTop_toBottomOf="@id/view_put_fail_tag" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_put_fail_tag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            app:chipSpacingVertical="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_put_fail_tag_title"
+            app:singleSelection="true" />
+
+        <CheckBox
+            android:id="@+id/cb_put_fail_tag_delay_till_tomorrow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_checkbox"
+            android:button="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cg_put_fail_tag" />
+
+        <TextView
+            android:id="@+id/tv_delayed_tomorrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/put_fail_tag_delayed_tomorrow"
+            android:textAppearance="@style/Body_M2"
+            app:layout_constraintBottom_toBottomOf="@+id/cb_put_fail_tag_delay_till_tomorrow"
+            app:layout_constraintStart_toEndOf="@+id/cb_put_fail_tag_delay_till_tomorrow"
+            app:layout_constraintTop_toTopOf="@+id/cb_put_fail_tag_delay_till_tomorrow" />
+
+        <TextView
+            android:id="@+id/tv_delayed_tomorrow_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/put_fail_tag_delay_tomorrow_error"
+            android:textAppearance="@style/Caption2"
+            android:textColor="@color/Error"
+            app:layout_constraintBottom_toTopOf="@+id/btn_complete_put_fail_tag"
+            app:layout_constraintStart_toEndOf="@+id/cb_put_fail_tag_delay_till_tomorrow"
+            app:layout_constraintStart_toStartOf="@+id/cb_put_fail_tag_delay_till_tomorrow"
+            app:layout_constraintTop_toBottomOf="@+id/cb_put_fail_tag_delay_till_tomorrow" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_complete_put_fail_tag"
+            style="@style/Body_M1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/bg_btn"
+            android:enabled="true"
+            android:paddingVertical="12dp"
+            android:text="@string/string_complete"
+            android:textColor="@color/Gray_50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_delayed_tomorrow_error"
+            app:layout_goneMarginTop="24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
