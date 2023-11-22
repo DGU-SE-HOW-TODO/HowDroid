@@ -5,7 +5,6 @@ import com.example.howdroid.presentation.type.FailTagType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-//"failTag" : ["잠", "정각병", "SNS", "게임"]
 class MyFailTagViewModel : ViewModel() {
     private val _failTagList = MutableStateFlow<List<FailTagType>>(listOf())
     val failTagList get() = _failTagList.asStateFlow()
