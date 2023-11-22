@@ -42,4 +42,27 @@
     <string name="home_title">오늘 할 일 %d% 달성</string>
     <string name="home_todo_detail_todo_fix">📌 TO DO 고정하기</string>
     <string name="home_todo_detail_failtag">🏷️ 실패 태그 달기</string>
+
+    <!--  failTag  -->
+    <string name="my_fail_tag_title">나만의 실패 태그 만들기</string>
+    <string name="my_fail_tag_sleep">잠</string>
+    <string name="my_fail_tag_sick">몸상태악화</string>
+    <string name="my_fail_tag_sudden_schedule">갑작스런일정</string>
+    <string name="my_fail_tag_weak_will">의지박약</string>
+    <string name="my_fail_tag_on_time">정각병</string>
+    <string name="my_fail_tag_sns">SNS</string>
+    <string name="my_fail_tag_game">게임</string>
+    <string name="my_fail_tag_time_management_failure">시간관리실패</string>
+    <string name="my_fail_tag_unreasonable_plan">무리한계획</string>
+    <string name="my_fail_tag_low_motivation">낮은동기부여</string>
+    <string name="my_fail_tag_change_schedule">일정변경</string>
+    <string name="my_fail_tag_rest">휴식</string>
+    <string name="my_fail_tag_slump">슬럼프</string>
+    <string name="my_fail_tag_lack_concentration">집중력부족</string>
+    <string name="my_fail_tag_phone_addiction">핸드폰중독</string>
+    <string name="my_fail_tag_lazy">하기싫어</string>
+    <string name="my_fail_tag_bad_condition">컨디션난조</string>
+    <string name="my_fail_tag_sub_title">나만의 실패 태그를 5개까지 만들 수 있어요!</string>
+    <string name="my_fail_tag_item"># %s</string>
+    <string name="string_complete">완료</string>
 </resources>
