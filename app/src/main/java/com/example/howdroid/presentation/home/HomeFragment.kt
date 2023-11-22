@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment :
     BindingFragment<FragmentHomeBinding>(R.layout.fragment_home),
-    TodoOptionClickListener {
+    TodoOptionClickListener, HomeBottomSheetListener {
 
     private val homeViewModel: HomeViewModel by viewModels()
     private val outerAdapter by lazy {
@@ -33,6 +33,7 @@ class HomeFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        addListeners()
         setHome()
         setHomeTitle()
         addCategory()
@@ -40,6 +41,23 @@ class HomeFragment :
 
     override fun onOptionClick(todoItem: Home.TodoItem) {
         val bottomSheetFragment = HomeBottomSheetFragment(todoItem)
+        bottomSheetFragment.listener = this
+        bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
+    }
+
+    private fun addListeners() {
+        binding.ivHomeToolbarFailtag.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_myFailTagActivity)
+        }
+    }
+
+    override fun onBottomSheetClosed(tag: String?) {
+        if (tag == TAG)
+            showPutFailTagBottomFragment()
+    }
+
+    private fun showPutFailTagBottomFragment() {
+        val bottomSheetFragment = PutFailTagBottomSheetFragment()
         bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
     }
 
@@ -75,5 +93,9 @@ class HomeFragment :
             SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE,
         )
         binding.tvToolbarTitle.text = postHomeTitle
+    }
+
+    companion object {
+        const val TAG = "homeBottomSheetFragmentTag"
     }
 }

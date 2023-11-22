@@ -9,10 +9,23 @@ import com.example.howdroid.util.binding.BindingBottomSheetDialogFragment
 
 class HomeBottomSheetFragment(private val todoItem: Home.TodoItem) :
     BindingBottomSheetDialogFragment<FragmentTodoDetailBinding>(R.layout.fragment_todo_detail) {
-
+    var listener: HomeBottomSheetListener? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvHomeTodoDetailTitle.text = todoItem.todo
+
+        binding.tvHomeTodoDetailFailtag.setOnClickListener {
+            listener?.onBottomSheetClosed(TAG)
+            dismiss()
+        }
     }
+
+    companion object {
+        const val TAG = "homeBottomSheetFragmentTag"
+    }
+}
+
+interface HomeBottomSheetListener {
+    fun onBottomSheetClosed(tag: String?)
 }
