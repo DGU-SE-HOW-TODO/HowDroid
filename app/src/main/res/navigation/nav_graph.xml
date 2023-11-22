@@ -6,7 +6,12 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.howdroid.presentation.home.HomeFragment"
-        android:label="HomeFragment"></fragment>
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_navigation_home_to_myFailTagActivity"
+            app:destination="@id/myFailTagActivity"
+            app:popUpTo="@id/navigation_home" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_chart"
         android:name="com.example.howdroid.presentation.chart.ChartFragment"
@@ -15,8 +20,4 @@
         android:id="@+id/navigation_mypage"
         android:name="com.example.howdroid.presentation.MyFragment"
         android:label="MyPageFragment" />
-    <activity
-        android:id="@+id/navigation_addToDo"
-        android:name="com.example.howdroid.presentation.AddToDoActivity"
-        android:label="AddToDoActivity" />
 </navigation>
