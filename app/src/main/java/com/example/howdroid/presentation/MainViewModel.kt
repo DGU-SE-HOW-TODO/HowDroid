@@ -1,6 +1,7 @@
 package com.example.howdroid.presentation
 
 import androidx.lifecycle.ViewModel
+import com.example.howdroid.presentation.type.PriorityType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
