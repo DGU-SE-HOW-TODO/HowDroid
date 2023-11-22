@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.howdroid.databinding.ItemOuterHomeTodoListBinding
 import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.util.extension.ItemDiffCallback
+import com.example.howdroid.util.extension.setOnSingleClickListener
 
 class HomeTodoOuterAdapter(
     private val onInnerItemClick: TodoOptionClickListener,
+    private val moveToAddToDo: (Unit) -> Unit,
 ) :
     ListAdapter<Home.TodoCategory, HomeTodoOuterAdapter.HomeTodoOuterViewHolder>(
         ItemDiffCallback<Home.TodoCategory>(
@@ -41,6 +43,9 @@ class HomeTodoOuterAdapter(
         fun onBind(home: Home.TodoCategory) {
             binding.tvHomeCategoryTitle.text = home.todoCategory
             (binding.rvInnerHomeTodoList.adapter as HomeTodoInnerAdapter).submitList(home.todoData)
+            binding.tvHomeCategoryAdd.setOnSingleClickListener {
+                moveToAddToDo(Unit)
+            }
         }
     }
 }

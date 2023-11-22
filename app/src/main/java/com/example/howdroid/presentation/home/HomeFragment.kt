@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.VISIBLE
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.howdroid.R
 import com.example.howdroid.databinding.FragmentHomeBinding
 import com.example.howdroid.domain.model.home.Home
@@ -21,6 +22,14 @@ class HomeFragment :
     TodoOptionClickListener {
 
     private val homeViewModel: HomeViewModel by viewModels()
+    private val outerAdapter by lazy {
+        HomeTodoOuterAdapter(
+            moveToAddToDo = {
+                findNavController().navigate(R.id.navigation_addToDo)
+            },
+            onInnerItemClick = this,
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,7 +53,6 @@ class HomeFragment :
 
     private fun setHome() {
         homeViewModel.homeData.observe(viewLifecycleOwner) { homeData ->
-            val outerAdapter = HomeTodoOuterAdapter(this)
             binding.rvOuterHomeTodoList.adapter = outerAdapter
             outerAdapter.submitList(homeData)
         }
