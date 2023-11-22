@@ -6,6 +6,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.howdroid.R
 import com.example.howdroid.databinding.ActivityMainBinding
+import com.example.howdroid.presentation.type.PriorityType
 import com.example.howdroid.util.binding.BindingActivity
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
