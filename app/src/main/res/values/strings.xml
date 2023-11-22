@@ -79,4 +79,9 @@
     <string name="my_fail_tag_sub_title">나만의 실패 태그를 5개까지 만들 수 있어요!</string>
     <string name="my_fail_tag_item"># %s</string>
     <string name="string_complete">완료</string>
+
+    <!--  put fail tag  -->
+    <string name="put_fail_tag_title">실패 태그 달기</string>
+    <string name="put_fail_tag_delayed_tomorrow">내일로 미루기</string>
+    <string name="put_fail_tag_delay_tomorrow_error">실패태그를 선택한 경우에만 미루기가 가능해요.</string>
 </resources>
