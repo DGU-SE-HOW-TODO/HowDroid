@@ -74,7 +74,7 @@
                 style="@style/Body_M2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="48dp"
                 android:layout_marginEnd="24dp"
                 android:text="@string/home_categoty_add"
                 android:textColor="@color/Gray_400"

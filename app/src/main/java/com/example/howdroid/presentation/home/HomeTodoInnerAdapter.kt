@@ -37,9 +37,7 @@ class HomeTodoInnerAdapter(
         fun onBind(todoItem: Home.TodoItem) {
             binding.tvHomeTodoTitle.text = todoItem.todo
             binding.cbHomeTodo.isChecked = todoItem.isChecked
-            binding.ivHomeTodoOption.setOnSingleClickListener {
-                onClick.onOptionClick(todoItem)
-            }
+
             val textColor = when (todoItem.priority) {
                 VERY_IMPORTANT -> ContextCompat.getColor(itemView.context, R.color.Orange)
                 IMPORTANT -> ContextCompat.getColor(itemView.context, R.color.Green_400)
@@ -47,6 +45,10 @@ class HomeTodoInnerAdapter(
                 else -> ContextCompat.getColor(itemView.context, R.color.Gray_50)
             }
             binding.viewHomeTodo.setBackgroundColor(textColor)
+
+            binding.root.setOnSingleClickListener {
+                onClick.onOptionClick(todoItem)
+            }
         }
     }
 
