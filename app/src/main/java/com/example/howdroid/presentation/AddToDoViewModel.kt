@@ -3,13 +3,13 @@ package com.example.howdroid.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.howdroid.presentation.type.PriorityType
 import com.example.howdroid.presentation.signup.SignUpViewModel
+import com.example.howdroid.presentation.type.PriorityType
 import com.example.howdroid.util.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class MainViewModel : ViewModel() {
+class AddToDoViewModel : ViewModel() {
     private val _priorityType = MutableStateFlow<PriorityType?>(null)
     val priorityType get() = _priorityType.asStateFlow()
 
@@ -24,7 +24,7 @@ class MainViewModel : ViewModel() {
         checkButtonEnabled()
     }
 
-    fun setaddToDoState(
+    fun setAddToDoState(
         toDoTitle: String,
     ) {
         _toDoTitle.value = validateField(toDoTitle) {

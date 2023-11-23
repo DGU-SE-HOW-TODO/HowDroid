@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main) {
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: AddToDoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
