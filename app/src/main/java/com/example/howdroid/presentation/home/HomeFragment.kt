@@ -18,7 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment :
-    BindingFragment<FragmentHomeBinding>(R.layout.fragment_home), TodoOptionClickListener,
+    BindingFragment<FragmentHomeBinding>(R.layout.fragment_home),
+    TodoOptionClickListener,
     HomeBottomSheetListener {
 
     private val homeViewModel: HomeViewModel by viewModels()
