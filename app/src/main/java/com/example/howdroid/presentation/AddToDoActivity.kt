@@ -1,7 +1,6 @@
 package com.example.howdroid.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -10,6 +9,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.howdroid.R
 import com.example.howdroid.databinding.ActivityAddTodoBinding
+import com.example.howdroid.presentation.type.PriorityType
 import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingActivity
 import com.example.howdroid.util.extension.setVisible
@@ -18,14 +18,12 @@ import kotlinx.coroutines.flow.onEach
 
 class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activity_add_todo) {
 
-    private val addToDoViewModel: MainViewModel by viewModels()
+    private val addToDoViewModel: AddToDoViewModel by viewModels()
 
     private val errorMessageTextView by lazy { binding.tvAddTodoErrorMessage }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Log.d("aaa", "불러는옴")
 
         observeLiveData()
         setTextChangeListeners()
@@ -36,29 +34,11 @@ class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activit
     private fun observePriorityType() {
         addToDoViewModel.priorityType.flowWithLifecycle(lifecycle).onEach { priorityType ->
             with(binding) {
-                when (priorityType) {
-                    PriorityType.MOST_IMPORTANT -> {
-                        customChipMostImportant.isSelected = true
-                        customChipImportant.isSelected = false
-                        customChipNotImportant.isSelected = false
-                    }
-
-                    PriorityType.IMPORTANT -> {
-                        customChipMostImportant.isSelected = false
-                        customChipImportant.isSelected = true
-                        customChipNotImportant.isSelected = false
-                    }
-
-                    PriorityType.NOT_IMPORTANT -> {
-                        customChipMostImportant.isSelected = false
-                        customChipImportant.isSelected = false
-                        customChipNotImportant.isSelected = true
-                    }
-
-                    else -> Unit
-                }
+                customChipMostImportant.isSelected = priorityType == PriorityType.MOST_IMPORTANT
                 customChipMostImportant.updateViewColor()
+                customChipImportant.isSelected = priorityType == PriorityType.IMPORTANT
                 customChipImportant.updateViewColor()
+                customChipNotImportant.isSelected = priorityType == PriorityType.NOT_IMPORTANT
                 customChipNotImportant.updateViewColor()
             }
         }.launchIn(lifecycleScope)
@@ -84,7 +64,7 @@ class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activit
     }
 
     private fun setTextChangeListeners() {
-        binding.etAddTodo.addTextChangedListener { updateSignUpInfo() }
+        binding.etAddTodo.addTextChangedListener { updateErrorMessage() }
     }
 
     private fun handleUiState(uiState: UiState<String>, textView: TextView) {
@@ -98,8 +78,8 @@ class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activit
         }
     }
 
-    private fun updateSignUpInfo() {
+    private fun updateErrorMessage() {
         val toDoTitle = binding.etAddTodo.text.toString()
-        addToDoViewModel.setaddToDoState(toDoTitle)
+        addToDoViewModel.setAddToDoState(toDoTitle)
     }
 }
