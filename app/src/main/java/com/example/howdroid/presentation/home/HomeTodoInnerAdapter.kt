@@ -1,6 +1,7 @@
 package com.example.howdroid.presentation.home
 
 import android.view.LayoutInflater
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
@@ -10,6 +11,7 @@ import com.example.howdroid.databinding.ItemInnerHomeTodoListBinding
 import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.util.extension.ItemDiffCallback
 import com.example.howdroid.util.extension.setOnSingleClickListener
+import com.example.howdroid.util.extension.setVisible
 
 class HomeTodoInnerAdapter(
     private val onClick: TodoOptionClickListener,
@@ -45,6 +47,12 @@ class HomeTodoInnerAdapter(
                 else -> ContextCompat.getColor(itemView.context, R.color.Gray_50)
             }
             binding.viewHomeTodo.setBackgroundColor(textColor)
+
+            if (todoItem.failTag != null) {
+                binding.tvHomeFailTag.text = String.format("# %s", todoItem.failTag)
+            } else {
+                binding.tvHomeFailTag.setVisible(GONE)
+            }
 
             binding.root.setOnSingleClickListener {
                 onClick.onOptionClick(todoItem)
