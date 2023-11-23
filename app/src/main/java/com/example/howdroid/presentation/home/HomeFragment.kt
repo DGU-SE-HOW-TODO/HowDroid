@@ -1,9 +1,13 @@
 package com.example.howdroid.presentation.home
 
+import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -36,19 +40,47 @@ class HomeFragment :
         setHome()
         setHomeTitle()
         addCategory()
+        setupTouchEvents()
     }
 
     override fun onOptionClick(todoItem: Home.TodoItem) {
         val bottomSheetFragment = HomeBottomSheetFragment(todoItem)
         bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
+        binding.clHomeAddCategory.setVisible(GONE)
     }
 
     private fun addCategory() {
         with(binding) {
             tvHomeAddCategoty.setOnSingleClickListener {
+                etHomeAddCategoty.text = null
                 clHomeAddCategory.setVisible(VISIBLE)
             }
         }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupTouchEvents() {
+        with(binding) {
+            root.setOnTouchListener { _, event -> handleTouchEvent(clHomeAddCategory, event) }
+            rvOuterHomeTodoList.setOnTouchListener { _, event ->
+                handleTouchEvent(
+                    clHomeAddCategory,
+                    event,
+                )
+            }
+        }
+    }
+
+    private fun handleTouchEvent(view: View, event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            val rect = Rect()
+            view.getGlobalVisibleRect(rect)
+            if (!rect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                view.setVisible(GONE)
+                return true
+            }
+        }
+        return false
     }
 
     private fun setHome() {
