@@ -32,7 +32,7 @@ class ChartFragment : BindingFragment<FragmentChartBinding>(R.layout.fragment_ch
     }
 
     override fun onDestroyView() {
-        binding.vpChart.adapter= null
+        binding.vpChart.adapter = null
         super.onDestroyView()
     }
 }
