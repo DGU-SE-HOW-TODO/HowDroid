@@ -62,22 +62,10 @@
             android:layout_height="wrap_content"
             android:text="@string/put_fail_tag_delayed_tomorrow"
             android:textAppearance="@style/Body_M2"
+            android:textColor="@color/selector_delayed_tomorrow"
             app:layout_constraintBottom_toBottomOf="@+id/cb_put_fail_tag_delay_till_tomorrow"
             app:layout_constraintStart_toEndOf="@+id/cb_put_fail_tag_delay_till_tomorrow"
             app:layout_constraintTop_toTopOf="@+id/cb_put_fail_tag_delay_till_tomorrow" />
-
-        <TextView
-            android:id="@+id/tv_delayed_tomorrow_error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/put_fail_tag_delay_tomorrow_error"
-            android:textAppearance="@style/Caption2"
-            android:textColor="@color/Error"
-            app:layout_constraintBottom_toTopOf="@+id/btn_complete_put_fail_tag"
-            app:layout_constraintStart_toEndOf="@+id/cb_put_fail_tag_delay_till_tomorrow"
-            app:layout_constraintStart_toStartOf="@+id/cb_put_fail_tag_delay_till_tomorrow"
-            app:layout_constraintTop_toBottomOf="@+id/cb_put_fail_tag_delay_till_tomorrow" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_complete_put_fail_tag"
@@ -85,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="40dp"
             android:background="@drawable/bg_btn"
             android:enabled="false"
@@ -95,7 +83,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_delayed_tomorrow_error"
+            app:layout_constraintTop_toBottomOf="@+id/cb_put_fail_tag_delay_till_tomorrow"
             app:layout_goneMarginTop="24dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv_delayed_tomorrow_error"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginTop="5dp"-->
+    <!--            android:text="@string/put_fail_tag_delay_tomorrow_error"-->
+    <!--            android:textAppearance="@style/Caption2"-->
+    <!--            android:textColor="@color/Error"-->
+    <!--            android:visibility="invisible"-->
+    <!--            app:layout_constraintBottom_toTopOf="@+id/btn_complete_put_fail_tag"-->
+    <!--            app:layout_constraintStart_toStartOf="@+id/btn_complete_put_fail_tag"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/cb_put_fail_tag_delay_till_tomorrow" />-->
