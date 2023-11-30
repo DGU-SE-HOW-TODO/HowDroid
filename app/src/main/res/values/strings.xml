@@ -9,6 +9,7 @@
     <string name="login_pw_hint">비밀번호 입력</string>
     <string name="login_btn_login">로그인</string>
     <string name="login_signup">회원가입</string>
+    <string name="login_fail_message">로그인 실패</string>
 
     <!--  signup  -->
     <string name="signup_title">프로필을\n설정해 주세요</string>
@@ -84,4 +85,6 @@
     <string name="put_fail_tag_title">실패 태그 달기</string>
     <string name="put_fail_tag_delayed_tomorrow">내일로 미루기</string>
     <string name="put_fail_tag_delay_tomorrow_error">실패태그를 선택한 경우에만 미루기가 가능해요.</string>
+    <string name="login_auto">로그인 상태 유지</string>
+
 </resources>

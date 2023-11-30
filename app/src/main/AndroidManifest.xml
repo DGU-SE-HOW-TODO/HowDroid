@@ -19,12 +19,6 @@
 
         <activity
             android:name=".presentation.login.LoginActivity"
-            android:exported="false"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity
-            android:name=".presentation.home.HomeActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -34,21 +28,26 @@
         </activity>
 
         <activity
+            android:name=".presentation.home.HomeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".presentation.signup.SignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".presentation.AddToDoActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".presentation.myFailTag.MyFailTagActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>

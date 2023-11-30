@@ -1,5 +1,8 @@
 package com.example.howdroid.di
 
+import com.example.howdroid.BuildConfig
+import com.example.howdroid.BuildConfig.DEBUG
+import com.example.howdroid.data.interceptor.AuthInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -40,25 +43,31 @@ object RetrofitModule {
     @Provides
     @Singleton
     @Logger
-    fun provideHttpLoggingInterceptor(): Interceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
+    fun provideAuthInterceptor(interceptor: AuthInterceptor): Interceptor = interceptor
 
     @Provides
     @Singleton
     fun providesOkHttpClient(
         @Logger loggingInterceptor: Interceptor,
     ): OkHttpClient =
-        OkHttpClient
-            .Builder()
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS)
-            .addInterceptor(loggingInterceptor).build()
+        OkHttpClient.Builder().apply {
+            connectTimeout(10, TimeUnit.SECONDS)
+            writeTimeout(10, TimeUnit.SECONDS)
+            readTimeout(10, TimeUnit.SECONDS)
+            addInterceptor(loggingInterceptor)
+            if (DEBUG) {
+                addInterceptor(
+                    HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    },
+                )
+            }
+        }.build()
 
     @Provides
     @Singleton
     fun providesAuthRetrofit(okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder().baseUrl("").client(okHttpClient).addConverterFactory(
+        Retrofit.Builder().baseUrl(BuildConfig.BASE_URL).client(okHttpClient).addConverterFactory(
             Json.asConverterFactory("application/json".toMediaType()),
         ).build()
 }
