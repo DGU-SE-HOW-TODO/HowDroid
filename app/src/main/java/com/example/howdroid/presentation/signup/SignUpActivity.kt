@@ -14,7 +14,7 @@ import com.example.howdroid.util.extension.setVisible
 
 class SignUpActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_signup) {
 
-    private val signUpViewModel: SignUpViewModel by viewModels()
+    private val signUpViewModel by viewModels<SignUpViewModel>()
     private val emailTextView by lazy { binding.tvSignupEmailMessage }
     private val nickNameTextView by lazy { binding.tvSignupNicknameMessage }
     private val passwordTextView by lazy { binding.tvSignupPasswordMessage }
