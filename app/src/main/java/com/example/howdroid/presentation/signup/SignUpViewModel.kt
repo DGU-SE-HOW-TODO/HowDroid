@@ -2,9 +2,11 @@ package com.example.howdroid.presentation.signup
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.howdroid.util.UiState
+import com.example.howdroid.util.extension.addSourceList
 
 class SignUpViewModel : ViewModel() {
 
@@ -20,8 +22,14 @@ class SignUpViewModel : ViewModel() {
     private val _passwordCheckData = MutableLiveData<UiState<String>>(UiState.Empty)
     val passwordCheckData: LiveData<UiState<String>> = _passwordCheckData
 
-    private val _isButtonEnabled = MutableLiveData<Boolean>()
-    val isButtonEnabled: LiveData<Boolean> = _isButtonEnabled
+    val isButtonEnabled = MediatorLiveData<Boolean>().apply {
+        addSourceList(
+            _emailData,
+            _nickNameData,
+            _passwordData,
+            _passwordCheckData,
+        ) { checkButtonEnabled() }
+    }
 
     fun setSignUpState(
         email: String,
@@ -44,8 +52,6 @@ class SignUpViewModel : ViewModel() {
         _passwordCheckData.value = validateField(passwordCheck) {
             it == password
         }
-
-        checkButtonEnabled()
     }
 
     private fun validateField(value: String, validation: (String) -> Boolean): UiState<String> {
@@ -58,16 +64,13 @@ class SignUpViewModel : ViewModel() {
         }
     }
 
-    private fun checkButtonEnabled() {
+    private fun checkButtonEnabled(): Boolean {
         val isEmailSuccess = _emailData.value is UiState.Success
         val isNickNameSuccess = _nickNameData.value is UiState.Success
         val isPasswordSuccess = _passwordData.value is UiState.Success
         val isPasswordCheckSuccess = _passwordCheckData.value is UiState.Success
 
-        val isButtonEnabled =
-            isEmailSuccess && isNickNameSuccess && isPasswordSuccess && isPasswordCheckSuccess
-
-        _isButtonEnabled.value = isButtonEnabled
+        return isEmailSuccess && isNickNameSuccess && isPasswordSuccess && isPasswordCheckSuccess
     }
 
     companion object {
