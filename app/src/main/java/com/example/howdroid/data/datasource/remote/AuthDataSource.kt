@@ -1,6 +1,7 @@
 package com.example.howdroid.data.datasource.remote
 
 import com.example.howdroid.data.model.request.RequestLoginDto
+import com.example.howdroid.data.model.response.ResponseEmailDto
 import com.example.howdroid.data.model.response.ResponseLoginDto
 import com.example.howdroid.data.service.AuthService
 import retrofit2.Response
@@ -12,4 +13,7 @@ class AuthDataSource @Inject constructor(
 
     suspend fun login(requestLogin: RequestLoginDto): Response<ResponseLoginDto> =
         authService.login(requestLogin)
+
+    suspend fun emailDuplication(email: String): ResponseEmailDto =
+        authService.emailDuplication(email)
 }

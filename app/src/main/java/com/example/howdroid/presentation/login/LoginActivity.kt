@@ -1,7 +1,6 @@
 package com.example.howdroid.presentation.login
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import com.example.howdroid.R
@@ -38,8 +37,6 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         val howDroidStorage = HowDroidStorage(this)
         if (howDroidStorage.isLogin) {
             startActivity<HomeActivity>()
-            // howDroidStorage.clear()
-            Log.d("aaa", "${howDroidStorage.accessToken}")
         }
     }
 
