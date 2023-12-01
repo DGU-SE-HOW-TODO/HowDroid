@@ -5,10 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.howdroid.domain.repository.AuthRepository
 import com.example.howdroid.util.UiState
 import com.example.howdroid.util.extension.addSourceList
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignUpViewModel : ViewModel() {
+@HiltViewModel
+class SignUpViewModel @Inject constructor(
+    private val authRepository: AuthRepository,
+) : ViewModel() {
 
     private val _emailData = MutableLiveData<UiState<String>>(UiState.Empty)
     val emailData: LiveData<UiState<String>> = _emailData
@@ -22,13 +30,29 @@ class SignUpViewModel : ViewModel() {
     private val _passwordCheckData = MutableLiveData<UiState<String>>(UiState.Empty)
     val passwordCheckData: LiveData<UiState<String>> = _passwordCheckData
 
+    private val _emailValid = MutableLiveData<UiState<Boolean>>(UiState.Empty)
+    val emailValid: LiveData<UiState<Boolean>> get() = _emailValid
+
     val isButtonEnabled = MediatorLiveData<Boolean>().apply {
         addSourceList(
             _emailData,
             _nickNameData,
             _passwordData,
             _passwordCheckData,
+            _emailValid,
         ) { checkButtonEnabled() }
+    }
+
+    fun emailDuplication(email: String) {
+        viewModelScope.launch {
+            authRepository.emailDuplication(email)
+                .onSuccess {
+                    _emailValid.value = UiState.Success(true)
+                }
+                .onFailure { throwable ->
+                    _emailValid.value = throwable.message?.let { UiState.Failure(it) }
+                }
+        }
     }
 
     fun setSignUpState(
@@ -69,8 +93,9 @@ class SignUpViewModel : ViewModel() {
         val isNickNameSuccess = _nickNameData.value is UiState.Success
         val isPasswordSuccess = _passwordData.value is UiState.Success
         val isPasswordCheckSuccess = _passwordCheckData.value is UiState.Success
+        val isEmailDuplicateSuccess = _emailValid.value is UiState.Success
 
-        return isEmailSuccess && isNickNameSuccess && isPasswordSuccess && isPasswordCheckSuccess
+        return isEmailSuccess && isNickNameSuccess && isPasswordSuccess && isPasswordCheckSuccess && isEmailDuplicateSuccess
     }
 
     companion object {

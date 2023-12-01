@@ -10,8 +10,12 @@ import com.example.howdroid.R
 import com.example.howdroid.databinding.ActivitySignupBinding
 import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingActivity
+import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.example.howdroid.util.extension.setVisible
+import com.example.howdroid.util.extension.showSnackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_signup) {
 
     private val signUpViewModel by viewModels<SignUpViewModel>()
@@ -29,10 +33,41 @@ class SignUpActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_
 
         setTextChangeListeners()
         observeLiveData()
+        checkEmailDuplication()
+        observeEmailDuplication()
+    }
+
+    private fun observeEmailDuplication() {
+        signUpViewModel.emailValid.observe(this) { uiState ->
+            when (uiState) {
+                is UiState.Success -> {
+                    binding.tvSignupEmailDuplicationSuccess.setVisible(VISIBLE)
+                }
+
+                is UiState.Failure -> {
+                    showSnackbar(binding.root, getString(R.string.signup_email_duplication_fail))
+                }
+
+                else -> Unit
+            }
+        }
+    }
+
+    private fun checkEmailDuplication() {
+        binding.tvSignupEmailDoubleCheck.setOnSingleClickListener {
+            if (signUpViewModel.emailData.value is UiState.Success) {
+                signUpViewModel.emailDuplication(email)
+            }
+        }
     }
 
     private fun observeLiveData() {
-        signUpViewModel.emailData.observe(this) { handleUiState(it, emailTextView) }
+        signUpViewModel.emailData.observe(this) { uiState ->
+            handleUiState(uiState, emailTextView)
+            if (uiState !is UiState.Success) {
+                binding.tvSignupEmailDuplicationSuccess.setVisible(INVISIBLE)
+            }
+        }
         signUpViewModel.nickNameData.observe(this) { handleUiState(it, nickNameTextView) }
         signUpViewModel.passwordData.observe(this) { handleUiState(it, passwordTextView) }
         signUpViewModel.passwordCheckData.observe(this) { handleUiState(it, passwordCheckTextView) }

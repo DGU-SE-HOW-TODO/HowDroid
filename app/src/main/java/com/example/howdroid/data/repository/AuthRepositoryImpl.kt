@@ -2,6 +2,7 @@ package com.example.howdroid.data.repository
 
 import com.example.howdroid.data.datasource.remote.AuthDataSource
 import com.example.howdroid.data.model.request.RequestLoginDto
+import com.example.howdroid.data.model.response.ResponseEmailDto
 import com.example.howdroid.data.model.response.ResponseLoginDto
 import com.example.howdroid.domain.repository.AuthRepository
 import retrofit2.Response
@@ -13,4 +14,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun login(requestLogin: RequestLoginDto): Result<Response<ResponseLoginDto>> =
         runCatching { authDataSource.login(requestLogin) }
+
+    override suspend fun emailDuplication(email: String): Result<ResponseEmailDto> =
+        runCatching { authDataSource.emailDuplication(email) }
 }
