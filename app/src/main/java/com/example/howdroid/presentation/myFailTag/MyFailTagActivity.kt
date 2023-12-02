@@ -4,12 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.example.howdroid.R
 import com.example.howdroid.databinding.ActivityMyFailTagBinding
 import com.example.howdroid.presentation.type.FailTagType
+import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingActivity
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
+@AndroidEntryPoint
 class MyFailTagActivity : BindingActivity<ActivityMyFailTagBinding>(R.layout.activity_my_fail_tag) {
     private val viewModel: MyFailTagViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +33,7 @@ class MyFailTagActivity : BindingActivity<ActivityMyFailTagBinding>(R.layout.act
             for (i in binding.chipGroupMyFailTag.checkedChipIds) {
                 list.add(getString(FailTagType.values().get(i - 1).titleRes))
             }
-            list.removeAll(list)
+            viewModel.setMyFailTag(list)
         }
     }
 
@@ -49,6 +56,13 @@ class MyFailTagActivity : BindingActivity<ActivityMyFailTagBinding>(R.layout.act
             }
             binding.btnCompleteMyFailTag.isEnabled = checkedChipCnt > 0
         }
+
+        viewModel.isSetFailTagSuccess.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> finish()
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun setMyFailTag() {
