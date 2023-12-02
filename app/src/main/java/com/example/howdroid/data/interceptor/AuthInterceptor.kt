@@ -16,7 +16,7 @@ class AuthInterceptor @Inject constructor(
 
         val authRequestBuilder = originalRequest.newBuilder()
         if (isAutoLogin) {
-            authRequestBuilder.addHeader(ACCESS_TOKEN, howDroidStorage.accessToken)
+            authRequestBuilder.addHeader(ACCESS_TOKEN, "")
         } else {
             authRequestBuilder.removeHeader(ACCESS_TOKEN)
         }
@@ -35,5 +35,6 @@ class AuthInterceptor @Inject constructor(
 
     companion object {
         const val ACCESS_TOKEN = "Authorization"
+        const val BEARER_PREFIX = "Bearer "
     }
 }
