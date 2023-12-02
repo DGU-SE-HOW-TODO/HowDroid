@@ -1,6 +1,7 @@
 package com.example.howdroid.data.service
 
 import com.example.howdroid.data.model.request.RequestLoginDto
+import com.example.howdroid.data.model.request.RequestSignUpDto
 import com.example.howdroid.data.model.response.ResponseEmailDto
 import com.example.howdroid.data.model.response.ResponseLoginDto
 import retrofit2.Response
@@ -20,4 +21,9 @@ interface AuthService {
     suspend fun emailDuplication(
         @Path("email") email: String,
     ): ResponseEmailDto
+
+    @POST("member/signup")
+    suspend fun signUp(
+        @Body requestSignUp: RequestSignUpDto,
+    )
 }

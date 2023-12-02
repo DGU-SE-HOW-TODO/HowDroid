@@ -1,6 +1,7 @@
 package com.example.howdroid.data.datasource.remote
 
 import com.example.howdroid.data.model.request.RequestLoginDto
+import com.example.howdroid.data.model.request.RequestSignUpDto
 import com.example.howdroid.data.model.response.ResponseEmailDto
 import com.example.howdroid.data.model.response.ResponseLoginDto
 import com.example.howdroid.data.service.AuthService
@@ -16,4 +17,7 @@ class AuthDataSource @Inject constructor(
 
     suspend fun emailDuplication(email: String): ResponseEmailDto =
         authService.emailDuplication(email)
+
+    suspend fun signUp(requestSignUpDto: RequestSignUpDto) =
+        authService.signUp(requestSignUpDto)
 }

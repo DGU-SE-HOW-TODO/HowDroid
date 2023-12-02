@@ -87,5 +87,6 @@
     <string name="put_fail_tag_delay_tomorrow_error">실패태그를 선택한 경우에만 미루기가 가능해요.</string>
     <string name="login_auto">로그인 상태 유지</string>
     <string name="signup_email_duplication_fail">이미 존재하는 아이디 입니다</string>
+    <string name="signup_fail">회원가입 실패</string>
 
 </resources>

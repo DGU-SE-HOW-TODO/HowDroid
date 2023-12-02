@@ -6,6 +6,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.howdroid.data.model.request.RequestSignUpDto
 import com.example.howdroid.domain.repository.AuthRepository
 import com.example.howdroid.util.UiState
 import com.example.howdroid.util.extension.addSourceList
@@ -33,6 +34,9 @@ class SignUpViewModel @Inject constructor(
     private val _emailValid = MutableLiveData<UiState<Boolean>>(UiState.Empty)
     val emailValid: LiveData<UiState<Boolean>> get() = _emailValid
 
+    private val _isSignUp = MutableLiveData<UiState<Boolean>>(UiState.Empty)
+    val isSignUp: LiveData<UiState<Boolean>> get() = _isSignUp
+
     val isButtonEnabled = MediatorLiveData<Boolean>().apply {
         addSourceList(
             _emailData,
@@ -52,6 +56,22 @@ class SignUpViewModel @Inject constructor(
                 .onFailure { throwable ->
                     _emailValid.value = throwable.message?.let { UiState.Failure(it) }
                 }
+        }
+    }
+
+    fun signup(email: String, nickName: String, password: String) {
+        viewModelScope.launch {
+            authRepository.signUp(
+                RequestSignUpDto(
+                    email,
+                    nickName,
+                    password,
+                ),
+            ).onSuccess {
+                _isSignUp.value = UiState.Success(true)
+            }.onFailure { throwable ->
+                _isSignUp.value = throwable.message?.let { UiState.Failure(it) }
+            }
         }
     }
 
