@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.howdroid.R
 import com.example.howdroid.databinding.FragmentHomeBinding
 import com.example.howdroid.domain.model.home.Home
+import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingFragment
 import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.example.howdroid.util.extension.setVisible
@@ -26,7 +27,7 @@ class HomeFragment :
     TodoOptionClickListener,
     HomeBottomSheetListener {
 
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel by viewModels<HomeViewModel>()
     private val outerAdapter by lazy {
         HomeTodoOuterAdapter(
             moveToAddToDo = {
@@ -39,13 +40,12 @@ class HomeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addListeners()
-        setHome()
-        setHomeTitle()
+        observeHomeData()
         addCategory()
         setupTouchEvents()
     }
 
-    override fun onOptionClick(todoItem: Home.TodoItem) {
+    override fun onOptionClick(todoItem: Home.TodoData) {
         val bottomSheetFragment = HomeBottomSheetFragment(todoItem)
         bottomSheetFragment.listener = this
         bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
@@ -54,6 +54,9 @@ class HomeFragment :
     private fun addListeners() {
         binding.ivHomeToolbarFailtag.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_myFailTagActivity)
+        }
+        binding.weeklyCalendar.setOnWeeklyDayClickListener { _, date ->
+            homeViewModel.getHomeData(date.toString())
         }
     }
 
@@ -103,22 +106,26 @@ class HomeFragment :
         return false
     }
 
-    private fun setHome() {
-        homeViewModel.homeData.observe(viewLifecycleOwner) { homeData ->
-            binding.rvOuterHomeTodoList.adapter = outerAdapter
-            outerAdapter.submitList(homeData)
-        }
+    private fun observeHomeData() {
+        homeViewModel.homeData.observe(viewLifecycleOwner) { uiState ->
+            when (uiState) {
+                is UiState.Success -> {
+                    binding.rvOuterHomeTodoList.adapter = outerAdapter
+                    outerAdapter.submitList(uiState.data.todoCategoryData)
+                    setHomeTitle(uiState.data.rateOfSuccess)
+                }
 
-        homeViewModel.getHomeData()
+                else -> Unit
+            }
+        }
     }
 
-    private fun setHomeTitle() {
+    private fun setHomeTitle(rateOfSuccess: Int) {
         val homeTitleString = getString(R.string.home_title)
-        val toDoPercent = 70 // 나중에 서버에서 받는 값으로 바꾸기
-        val homeTitle = homeTitleString.replace("%d%", "$toDoPercent%")
+        val homeTitle = homeTitleString.replace("%d%", "$rateOfSuccess%")
         val postHomeTitle = SpannableString(homeTitle)
-        val startIndex = homeTitle.indexOf(toDoPercent.toString())
-        val endIndex = startIndex + toDoPercent.toString().length + 1
+        val startIndex = homeTitle.indexOf(rateOfSuccess.toString())
+        val endIndex = startIndex + rateOfSuccess.toString().length + 1
 
         postHomeTitle.setSpan(
             ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.Green_300)),

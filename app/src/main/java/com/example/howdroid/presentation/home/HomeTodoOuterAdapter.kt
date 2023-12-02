@@ -13,8 +13,8 @@ class HomeTodoOuterAdapter(
     private val onInnerItemClick: TodoOptionClickListener,
     private val moveToAddToDo: (Unit) -> Unit,
 ) :
-    ListAdapter<Home.TodoCategory, HomeTodoOuterAdapter.HomeTodoOuterViewHolder>(
-        ItemDiffCallback<Home.TodoCategory>(
+    ListAdapter<Home.TodoCategoryData, HomeTodoOuterAdapter.HomeTodoOuterViewHolder>(
+        ItemDiffCallback<Home.TodoCategoryData>(
             onItemsTheSame = { old, new -> old == new },
             onContentsTheSame = { old, new -> old == new },
         ),
@@ -40,9 +40,13 @@ class HomeTodoOuterAdapter(
             binding.rvInnerHomeTodoList.adapter = HomeTodoInnerAdapter(onInnerItemClick)
         }
 
-        fun onBind(home: Home.TodoCategory) {
+        fun onBind(
+            home: Home.TodoCategoryData,
+        ) {
             binding.tvHomeCategoryTitle.text = home.todoCategory
-            (binding.rvInnerHomeTodoList.adapter as HomeTodoInnerAdapter).submitList(home.todoData)
+            (binding.rvInnerHomeTodoList.adapter as HomeTodoInnerAdapter).submitList(
+                home.todoData,
+            )
             binding.tvHomeCategoryAdd.setOnSingleClickListener {
                 moveToAddToDo(Unit)
             }

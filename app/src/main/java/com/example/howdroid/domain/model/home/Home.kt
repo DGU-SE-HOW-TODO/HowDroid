@@ -1,23 +1,22 @@
 package com.example.howdroid.domain.model.home
 
 data class Home(
-    val todoCategoryData: List<TodoCategory>,
-    val todayDate: String,
-    val selectedDate: String,
+    val rateOfSuccess: Int,
+    val todoCategoryData: List<TodoCategoryData>,
 ) {
-    data class TodoCategory(
+    data class TodoCategoryData(
         val todoCategoryId: Int,
         val todoCategory: String,
-        val todoData: List<TodoItem>,
+        val todoData: List<TodoData>,
     )
 
-    data class TodoItem(
-        val todoId: Int,
-        val todoCategory: String,
-        val todo: String,
-        val priority: String,
+    data class TodoData(
+        val failtagName: String?,
         val isChecked: Boolean,
+        val isDelayed: Boolean,
         val isFixed: Boolean,
-        val failTag: String?,
+        val priority: String,
+        val todoId: Int,
+        val todoName: String,
     )
 }

@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class PutFailTagBottomSheetFragment :
     BindingBottomSheetDialogFragment<FragmentBottomPutFaillTagBinding>(
-        R.layout.fragment_bottom_put_faill_tag
+        R.layout.fragment_bottom_put_faill_tag,
     ) {
     // TODO 임시 데이터 삭제
     private val mockMyFailTagList = listOf("잠", "정각병", "SNS", "게임")
@@ -37,7 +37,7 @@ class PutFailTagBottomSheetFragment :
             val chip = inflater.inflate(
                 R.layout.view_fail_tag_chip,
                 binding.cgPutFailTag,
-                false
+                false,
             ) as Chip
             chip.apply {
                 id = View.generateViewId()
@@ -64,8 +64,9 @@ class PutFailTagBottomSheetFragment :
                 val checkedChip = group.findViewById<Chip>(group.checkedChipId)
                 val checkedChipTitle = checkedChip.text.toString()
                 for (chipTitleWithoutHashTag in mockMyFailTagList) {
-                    if (checkedChipTitle.contains(chipTitleWithoutHashTag))
+                    if (checkedChipTitle.contains(chipTitleWithoutHashTag)) {
                         viewModel.setSelectedFailTag(chipTitleWithoutHashTag)
+                    }
                 }
             } else {
                 viewModel.setSelectedFailTag(null)

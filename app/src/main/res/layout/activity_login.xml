@@ -89,6 +89,7 @@
             android:id="@+id/cb_login_auto"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
             android:minWidth="0dp"
             android:minHeight="0dp"
             app:layout_constraintStart_toStartOf="@+id/et_login_pw"
