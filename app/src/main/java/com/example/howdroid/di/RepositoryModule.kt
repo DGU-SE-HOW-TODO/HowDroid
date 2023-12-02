@@ -2,8 +2,10 @@ package com.example.howdroid.di
 
 import com.example.howdroid.data.repository.AuthRepositoryImpl
 import com.example.howdroid.data.repository.HomeRepositoryImpl
+import com.example.howdroid.data.repository.MyFailTagRepositoryImpl
 import com.example.howdroid.domain.repository.AuthRepository
 import com.example.howdroid.domain.repository.HomeRepository
+import com.example.howdroid.domain.repository.MyFailTagRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,4 +25,9 @@ object RepositoryModule {
     @Singleton
     fun providesHomeRepository(homeRepository: HomeRepositoryImpl): HomeRepository =
         homeRepository
+
+    @Provides
+    @Singleton
+    fun providesMyFailTagRepository(myFailTagRepositoryImpl: MyFailTagRepositoryImpl): MyFailTagRepository =
+        myFailTagRepositoryImpl
 }
