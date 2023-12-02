@@ -2,6 +2,7 @@ package com.example.howdroid.di
 
 import com.example.howdroid.data.service.AuthService
 import com.example.howdroid.data.service.HomeService
+import com.example.howdroid.data.service.MyFailTagService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,4 +22,8 @@ object ServiceModule {
     @Provides
     @Singleton
     fun provideHomeService(retrofit: Retrofit): HomeService = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideMyFailTagService(retrofit: Retrofit): MyFailTagService = retrofit.create()
 }
