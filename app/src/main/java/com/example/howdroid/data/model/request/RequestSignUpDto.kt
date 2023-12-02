@@ -1,6 +1,5 @@
 package com.example.howdroid.data.model.request
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,5 +10,5 @@ data class RequestSignUpDto(
     @SerialName("nickname")
     val nickname: String,
     @SerialName("password")
-    val password: String
+    val password: String,
 )
