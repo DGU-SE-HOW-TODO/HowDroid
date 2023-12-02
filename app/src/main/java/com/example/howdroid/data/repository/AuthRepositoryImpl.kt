@@ -2,6 +2,7 @@ package com.example.howdroid.data.repository
 
 import com.example.howdroid.data.datasource.remote.AuthDataSource
 import com.example.howdroid.data.model.request.RequestLoginDto
+import com.example.howdroid.data.model.request.RequestSignUpDto
 import com.example.howdroid.data.model.response.ResponseEmailDto
 import com.example.howdroid.data.model.response.ResponseLoginDto
 import com.example.howdroid.domain.repository.AuthRepository
@@ -17,4 +18,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun emailDuplication(email: String): Result<ResponseEmailDto> =
         runCatching { authDataSource.emailDuplication(email) }
+
+    override suspend fun signUp(requestSignUpDto: RequestSignUpDto): Result<Unit> =
+        runCatching { authDataSource.signUp(requestSignUpDto) }
 }

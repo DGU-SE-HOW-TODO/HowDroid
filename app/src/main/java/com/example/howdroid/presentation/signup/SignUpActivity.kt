@@ -8,11 +8,13 @@ import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import com.example.howdroid.R
 import com.example.howdroid.databinding.ActivitySignupBinding
+import com.example.howdroid.presentation.login.LoginActivity
 import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingActivity
 import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.example.howdroid.util.extension.setVisible
 import com.example.howdroid.util.extension.showSnackbar
+import com.example.howdroid.util.extension.startActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,6 +37,32 @@ class SignUpActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_
         observeLiveData()
         checkEmailDuplication()
         observeEmailDuplication()
+        clickSignUpButton()
+        observeSignUp()
+    }
+
+    private fun observeSignUp() {
+        signUpViewModel.isSignUp.observe(this) { uiState ->
+            when (uiState) {
+                is UiState.Success -> {
+                    startActivity<LoginActivity>()
+                }
+
+                is UiState.Failure -> {
+                    showSnackbar(binding.root, getString(R.string.signup_fail))
+                }
+
+                else -> Unit
+            }
+        }
+    }
+
+    private fun clickSignUpButton() {
+        binding.btnSignup.setOnSingleClickListener {
+            if (signUpViewModel.isButtonEnabled.value == true) {
+                signUpViewModel.signup(email, nickName, password)
+            }
+        }
     }
 
     private fun observeEmailDuplication() {
