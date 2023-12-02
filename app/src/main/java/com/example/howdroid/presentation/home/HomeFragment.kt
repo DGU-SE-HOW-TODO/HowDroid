@@ -58,8 +58,9 @@ class HomeFragment :
     }
 
     override fun onBottomSheetClosed(tag: String?) {
-        if (tag == TAG)
+        if (tag == TAG) {
             showPutFailTagBottomFragment()
+        }
     }
 
     private fun showPutFailTagBottomFragment() {
