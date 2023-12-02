@@ -65,8 +65,8 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
 
     private fun clickLoginBtn() {
         binding.btnLogin.setOnSingleClickListener {
-            // 나중에 email, passWord 로 바꾸기
-            logInViewModel.login("helloworld@naver.com", "helloworldps")
+            // TODO 나중에 email, passWord 로 바꾸기
+            logInViewModel.login(email, passWord)
         }
     }
 

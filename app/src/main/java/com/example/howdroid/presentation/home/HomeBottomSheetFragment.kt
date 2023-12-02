@@ -6,14 +6,16 @@ import com.example.howdroid.R
 import com.example.howdroid.databinding.FragmentTodoDetailBinding
 import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.util.binding.BindingBottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class HomeBottomSheetFragment(private val todoItem: Home.TodoItem) :
+@AndroidEntryPoint
+class HomeBottomSheetFragment(private val todoItem: Home.TodoData) :
     BindingBottomSheetDialogFragment<FragmentTodoDetailBinding>(R.layout.fragment_todo_detail) {
     var listener: HomeBottomSheetListener? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvHomeTodoDetailTitle.text = todoItem.todo
+        binding.tvHomeTodoDetailTitle.text = todoItem.todoName
 
         binding.tvHomeTodoDetailFailtag.setOnClickListener {
             listener?.onBottomSheetClosed(TAG)

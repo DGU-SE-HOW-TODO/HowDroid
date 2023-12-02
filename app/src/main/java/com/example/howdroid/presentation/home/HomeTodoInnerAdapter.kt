@@ -16,8 +16,8 @@ import com.example.howdroid.util.extension.setVisible
 class HomeTodoInnerAdapter(
     private val onClick: TodoOptionClickListener,
 ) :
-    ListAdapter<Home.TodoItem, HomeTodoInnerAdapter.HomeTodoInnerViewHolder>(
-        ItemDiffCallback<Home.TodoItem>(
+    ListAdapter<Home.TodoData, HomeTodoInnerAdapter.HomeTodoInnerViewHolder>(
+        ItemDiffCallback<Home.TodoData>(
             onItemsTheSame = { old, new -> old == new },
             onContentsTheSame = { old, new -> old == new },
         ),
@@ -36,8 +36,8 @@ class HomeTodoInnerAdapter(
     inner class HomeTodoInnerViewHolder(private val binding: ItemInnerHomeTodoListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(todoItem: Home.TodoItem) {
-            binding.tvHomeTodoTitle.text = todoItem.todo
+        fun onBind(todoItem: Home.TodoData) {
+            binding.tvHomeTodoTitle.text = todoItem.todoName
             binding.cbHomeTodo.isChecked = todoItem.isChecked
 
             val textColor = when (todoItem.priority) {
@@ -48,8 +48,8 @@ class HomeTodoInnerAdapter(
             }
             binding.viewHomeTodo.setBackgroundColor(textColor)
 
-            if (todoItem.failTag != null) {
-                binding.tvHomeFailTag.text = String.format("# %s", todoItem.failTag)
+            if (todoItem.failtagName != null) {
+                binding.tvHomeFailTag.text = String.format("# %s", todoItem.failtagName)
             } else {
                 binding.tvHomeFailTag.setVisible(GONE)
             }
