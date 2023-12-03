@@ -1,5 +1,6 @@
 package com.example.howdroid.data.datasource.remote
 
+import com.example.howdroid.data.model.request.RequestCategoryDto
 import com.example.howdroid.data.model.response.ResponseHomeDto
 import com.example.howdroid.data.service.HomeService
 import javax.inject.Inject
@@ -7,7 +8,9 @@ import javax.inject.Inject
 class HomeDataSource @Inject constructor(
     private val homeService: HomeService,
 ) {
-
     suspend fun getHomeData(selectedDate: String): ResponseHomeDto =
         homeService.getHomeData(selectedDate)
+
+    suspend fun postCategory(requestCategoryDto: RequestCategoryDto) =
+        homeService.postCategory(requestCategoryDto)
 }

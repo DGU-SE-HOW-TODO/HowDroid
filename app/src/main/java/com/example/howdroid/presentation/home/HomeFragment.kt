@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -41,8 +42,21 @@ class HomeFragment :
         super.onViewCreated(view, savedInstanceState)
         addListeners()
         observeHomeData()
+        showAddCategory()
         addCategory()
         setupTouchEvents()
+    }
+
+    private fun addCategory() {
+        binding.etHomeAddCategoty.setOnEditorActionListener { _, actionId, _ ->
+            val categoryName = binding.etHomeAddCategoty.text.toString()
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                homeViewModel.postCategory(categoryName)
+                true
+            } else {
+                false
+            }
+        }
     }
 
     override fun onOptionClick(todoItem: Home.TodoData) {
@@ -56,7 +70,8 @@ class HomeFragment :
             findNavController().navigate(R.id.action_navigation_home_to_myFailTagActivity)
         }
         binding.weeklyCalendar.setOnWeeklyDayClickListener { _, date ->
-            homeViewModel.setSelectedDate(date.toString())
+            homeViewModel.getHomeData(date.toString())
+            observeHomeData()
         }
     }
 
@@ -77,7 +92,7 @@ class HomeFragment :
         binding.clHomeAddCategory.setVisible(GONE)
     }
 
-    private fun addCategory() {
+    private fun showAddCategory() {
         with(binding) {
             tvHomeAddCategoty.setOnSingleClickListener {
                 etHomeAddCategoty.text = null
