@@ -70,8 +70,7 @@ class HomeFragment :
             findNavController().navigate(R.id.action_navigation_home_to_myFailTagActivity)
         }
         binding.weeklyCalendar.setOnWeeklyDayClickListener { _, date ->
-            homeViewModel.getHomeData(date.toString())
-            observeHomeData()
+            homeViewModel.setSelectedDate(date.toString())
         }
     }
 
