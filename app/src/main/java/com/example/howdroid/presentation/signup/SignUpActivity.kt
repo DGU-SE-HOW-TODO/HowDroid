@@ -71,7 +71,13 @@ class SignUpActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_
         signUpViewModel.emailValid.observe(this) { uiState ->
             when (uiState) {
                 is UiState.Success -> {
-                    binding.tvSignupEmailDuplicationSuccess.setVisible(VISIBLE)
+                    if (uiState.data) {
+                        binding.tvSignupEmailDuplicationSuccess.setVisible(VISIBLE)
+                        binding.tvSignupEmailDuplication.setVisible(INVISIBLE)
+                    } else {
+                        binding.tvSignupEmailDuplicationSuccess.setVisible(INVISIBLE)
+                        binding.tvSignupEmailDuplication.setVisible(VISIBLE)
+                    }
                 }
 
                 is UiState.Failure -> {

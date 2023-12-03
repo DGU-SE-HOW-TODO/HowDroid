@@ -5,6 +5,7 @@ import com.example.howdroid.data.model.request.RequestSignUpDto
 import com.example.howdroid.data.model.response.ResponseEmailDto
 import com.example.howdroid.data.model.response.ResponseLoginDto
 import com.example.howdroid.data.service.AuthService
+import retrofit2.Response
 import javax.inject.Inject
 
 class AuthDataSource @Inject constructor(
@@ -14,7 +15,7 @@ class AuthDataSource @Inject constructor(
     suspend fun login(requestLogin: RequestLoginDto): ResponseLoginDto =
         authService.login(requestLogin)
 
-    suspend fun emailDuplication(email: String): ResponseEmailDto =
+    suspend fun emailDuplication(email: String): Response<ResponseEmailDto> =
         authService.emailDuplication(email)
 
     suspend fun signUp(requestSignUpDto: RequestSignUpDto) =

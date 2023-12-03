@@ -89,5 +89,6 @@
     <string name="put_fail_tag_delayed_tomorrow">내일로 미루기</string>
     <string name="put_fail_tag_delay_tomorrow_error">실패태그를 선택한 경우에만 미루기가 가능해요.</string>
     <string name="login_auto">로그인 상태 유지</string>
+    <string name="signup_email_duplication">이미 존재하는 이메일 입니다</string>
 
 </resources>
