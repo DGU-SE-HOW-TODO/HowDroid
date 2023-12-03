@@ -31,6 +31,7 @@ class HomeFragment :
     HomeBottomSheetListener {
 
     private val homeViewModel by viewModels<HomeViewModel>()
+    var toDoId: Int = -1
     private val outerAdapter by lazy {
         HomeTodoOuterAdapter(
             moveToAddToDo = { categoryId ->
@@ -67,6 +68,7 @@ class HomeFragment :
     }
 
     override fun onOptionClick(todoItem: Home.TodoData) {
+        toDoId = todoItem.todoId
         val bottomSheetFragment = HomeBottomSheetFragment(todoItem)
         bottomSheetFragment.listener = this
         bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
@@ -94,6 +96,11 @@ class HomeFragment :
     private fun showPutFailTagBottomFragment() {
         val bottomSheetFragment = PutFailTagBottomSheetFragment()
             .apply { putDataToBundle() }
+            .apply {
+                val bundle = Bundle()
+                bundle.putInt(TODO_ID, this@HomeFragment.toDoId)
+                arguments = bundle
+            }
         bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
         binding.clHomeAddCategory.setVisible(GONE)
     }
@@ -182,5 +189,6 @@ class HomeFragment :
         const val TAG = "homeBottomSheetFragmentTag"
         const val SELECTED_DATE = "selectedDate"
         const val CATEGORY_ID = "categoryId"
+        const val TODO_ID = "todoId"
     }
 }

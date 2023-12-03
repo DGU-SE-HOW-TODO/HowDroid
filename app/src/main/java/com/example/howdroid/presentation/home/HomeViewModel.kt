@@ -1,5 +1,6 @@
 package com.example.howdroid.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,7 +23,7 @@ class HomeViewModel @Inject constructor(
 
     private val _homeData = MutableLiveData<UiState<Home>>(UiState.Empty)
     val homeData: LiveData<UiState<Home>> get() = _homeData
-    private val _selectedDate = MutableLiveData<String>(LocalDate.now().toString())
+    private val _selectedDate = MutableLiveData(LocalDate.now().toString())
     val selectedDate get() = _selectedDate
 
     init {
@@ -31,8 +32,8 @@ class HomeViewModel @Inject constructor(
 
     fun getHomeData() {
         viewModelScope.launch {
-            _selectedDate.value?.let {
-                homeRepository.getHomeData(it)
+            _selectedDate.value?.let { selectedDate ->
+                homeRepository.getHomeData(selectedDate)
                     .onSuccess {
                         _homeData.value = UiState.Success(it)
                     }.onFailure { throwable ->
