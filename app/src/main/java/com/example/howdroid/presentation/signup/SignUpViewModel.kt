@@ -51,7 +51,11 @@ class SignUpViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.emailDuplication(email)
                 .onSuccess {
-                    _emailValid.value = UiState.Success(true)
+                    if (it.code() == 200) {
+                        _emailValid.value = UiState.Success(true)
+                    } else if (it.code() == 404) {
+                        _emailValid.value = UiState.Success(false)
+                    }
                 }
                 .onFailure { throwable ->
                     _emailValid.value = throwable.message?.let { UiState.Failure(it) }

@@ -114,6 +114,18 @@
                         app:layout_constraintEnd_toEndOf="@id/et_signup_email"
                         app:layout_constraintTop_toBottomOf="@id/et_signup_email" />
 
+                    <TextView
+                        android:id="@+id/tv_signup_email_duplication"
+                        style="@style/Caption2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/signup_email_duplication"
+                        android:textColor="@color/Pink_500"
+                        android:visibility="invisible"
+                        app:layout_constraintEnd_toEndOf="@id/et_signup_email"
+                        app:layout_constraintTop_toBottomOf="@id/et_signup_email" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
