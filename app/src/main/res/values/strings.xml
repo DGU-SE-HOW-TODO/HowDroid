@@ -53,6 +53,9 @@
     <string name="add_todo_hint">15자 이하로 입력해 주세요</string>
     <string name="add_todo_priority_title">우선 순위를 정해볼까요?</string>
     <string name="add_todo_done">완료</string>
+    <string name="add_todo_most_important">매우중요</string>
+    <string name="add_todo_important">중요</string>
+    <string name="add_todo_not_important">중요하지 않음</string>
 
     <!--  chart  -->
     <string name="chart_statistic_title">통계</string>

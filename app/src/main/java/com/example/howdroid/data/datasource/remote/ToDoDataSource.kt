@@ -1,5 +1,6 @@
 package com.example.howdroid.data.datasource.remote
 
+import com.example.howdroid.data.model.request.RequestAddToDoDto
 import com.example.howdroid.data.service.ToDoService
 import javax.inject.Inject
 
@@ -8,4 +9,7 @@ class ToDoDataSource @Inject constructor(
 ) {
     suspend fun checkToDo(toDoId: Long) =
         toDoService.checkToDo(toDoId)
+
+    suspend fun addToDo(requestAddToDoDto: RequestAddToDoDto) =
+        toDoService.addToDo(requestAddToDoDto)
 }
