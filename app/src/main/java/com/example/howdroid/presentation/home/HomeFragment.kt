@@ -68,6 +68,11 @@ class HomeFragment :
 
     private fun showPutFailTagBottomFragment() {
         val bottomSheetFragment = PutFailTagBottomSheetFragment()
+            .apply {
+                val bundle = Bundle()
+                bundle.putString(SELECTED_DATE, homeViewModel.selectedDate.value)
+                arguments = bundle
+            }
         bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
         binding.clHomeAddCategory.setVisible(GONE)
     }
@@ -146,5 +151,6 @@ class HomeFragment :
 
     companion object {
         const val TAG = "homeBottomSheetFragmentTag"
+        const val SELECTED_DATE = "selectedDate"
     }
 }
