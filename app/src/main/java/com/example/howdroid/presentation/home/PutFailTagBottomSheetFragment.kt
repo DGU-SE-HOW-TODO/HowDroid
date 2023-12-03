@@ -34,6 +34,7 @@ class PutFailTagBottomSheetFragment :
         collectData()
     }
 
+    // TODO configuration change 될 때 칩 중복 생성되는 에러 해결
     private fun setMyFailTag() {
         val inflater = LayoutInflater.from(requireContext())
         for (failTagName in myFailTagList) {
