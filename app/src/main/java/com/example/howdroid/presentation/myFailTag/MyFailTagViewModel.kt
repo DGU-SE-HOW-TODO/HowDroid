@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,9 +23,7 @@ class MyFailTagViewModel @Inject constructor(
         viewModelScope.launch {
             myFailTagRepository.setMyFailTag(
                 RequestMyFailTag(
-                    year = 2023,
-                    month = 12,
-                    week = 1,
+                    selectedDate = LocalDate.now().toString(),
                     selectedFailtagList = failTagList
                 )
             ).onSuccess {
