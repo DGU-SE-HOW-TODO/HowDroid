@@ -9,18 +9,25 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.howdroid.R
 import com.example.howdroid.databinding.ActivityAddTodoBinding
+import com.example.howdroid.presentation.home.HomeFragment.Companion.CATEGORY_ID
+import com.example.howdroid.presentation.home.HomeFragment.Companion.SELECTED_DATE
 import com.example.howdroid.presentation.type.PriorityType
 import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingActivity
+import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.example.howdroid.util.extension.setVisible
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activity_add_todo) {
 
     private val addToDoViewModel: AddToDoViewModel by viewModels()
-
     private val errorMessageTextView by lazy { binding.tvAddTodoErrorMessage }
+    lateinit var selectedDate: String
+    var categoryId by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +36,20 @@ class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activit
         setTextChangeListeners()
         setPriorityType()
         observePriorityType()
+        postAddToDo()
+    }
+
+    private fun postAddToDo() {
+        selectedDate = intent.extras?.getString(SELECTED_DATE).toString()
+        categoryId = intent.extras?.getInt(CATEGORY_ID) ?: 0
+
+        binding.btnAddTodoDone.setOnSingleClickListener {
+            addToDoViewModel.addTodo(
+                selectedDate,
+                binding.etAddTodo.text.toString(),
+                categoryId,
+            )
+        }
     }
 
     private fun observePriorityType() {

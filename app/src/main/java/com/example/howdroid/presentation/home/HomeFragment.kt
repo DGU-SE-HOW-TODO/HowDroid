@@ -33,8 +33,10 @@ class HomeFragment :
     private val homeViewModel by viewModels<HomeViewModel>()
     private val outerAdapter by lazy {
         HomeTodoOuterAdapter(
-            moveToAddToDo = {
-                findNavController().navigate(R.id.navigation_addToDo)
+            moveToAddToDo = { categoryId ->
+                val bundle = putDataToBundle()
+                bundle.putInt(CATEGORY_ID, categoryId)
+                findNavController().navigate(R.id.navigation_addToDo, bundle)
             },
             onInnerItemClick = this,
             onInnerToDoCheck = this,
@@ -91,13 +93,16 @@ class HomeFragment :
 
     private fun showPutFailTagBottomFragment() {
         val bottomSheetFragment = PutFailTagBottomSheetFragment()
-            .apply {
-                val bundle = Bundle()
-                bundle.putString(SELECTED_DATE, homeViewModel.selectedDate.value)
-                arguments = bundle
-            }
+            .apply { putDataToBundle() }
         bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
         binding.clHomeAddCategory.setVisible(GONE)
+    }
+
+    private fun putDataToBundle(): Bundle {
+        val bundle = Bundle()
+        bundle.putString(SELECTED_DATE, homeViewModel.selectedDate.value)
+        arguments = bundle
+        return bundle
     }
 
     private fun showAddCategory() {
@@ -176,5 +181,6 @@ class HomeFragment :
     companion object {
         const val TAG = "homeBottomSheetFragmentTag"
         const val SELECTED_DATE = "selectedDate"
+        const val CATEGORY_ID = "categoryId"
     }
 }

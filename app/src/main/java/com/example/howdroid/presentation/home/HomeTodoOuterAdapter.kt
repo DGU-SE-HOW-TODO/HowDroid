@@ -12,7 +12,7 @@ import com.example.howdroid.util.extension.setOnSingleClickListener
 class HomeTodoOuterAdapter(
     private val onInnerItemClick: TodoOptionClickListener,
     private val onInnerToDoCheck: TodoCheckClickListener,
-    private val moveToAddToDo: (Unit) -> Unit,
+    private val moveToAddToDo: (Int) -> Unit,
 ) :
     ListAdapter<Home.TodoCategoryData, HomeTodoOuterAdapter.HomeTodoOuterViewHolder>(
         ItemDiffCallback<Home.TodoCategoryData>(
@@ -51,7 +51,7 @@ class HomeTodoOuterAdapter(
                 home.todoData,
             )
             binding.tvHomeCategoryAdd.setOnSingleClickListener {
-                moveToAddToDo(Unit)
+                moveToAddToDo(home.todoCategoryId)
             }
         }
     }
