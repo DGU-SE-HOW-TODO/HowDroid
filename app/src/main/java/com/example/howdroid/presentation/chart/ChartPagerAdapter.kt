@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ChartPagerAdapter(
     private val fragmentList: ArrayList<Fragment>,
-    fragmentActivity: FragmentActivity
+    fragmentActivity: FragmentActivity,
 ) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int = fragmentList.size
     override fun createFragment(position: Int): Fragment {

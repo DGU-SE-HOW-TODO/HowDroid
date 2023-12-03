@@ -5,7 +5,6 @@ import com.example.howdroid.data.model.request.RequestSignUpDto
 import com.example.howdroid.data.model.response.ResponseEmailDto
 import com.example.howdroid.data.model.response.ResponseLoginDto
 import com.example.howdroid.data.service.AuthService
-import retrofit2.Response
 import javax.inject.Inject
 
 class AuthDataSource @Inject constructor(

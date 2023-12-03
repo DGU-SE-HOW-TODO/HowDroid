@@ -75,7 +75,7 @@ class ChartStatisticFragment :
                 colors = context?.let {
                     listOf(
                         it.getColor(R.color.Gray_300),
-                        it.getColor(R.color.Green_300)
+                        it.getColor(R.color.Green_300),
                     )
                 }
                 valueFormatter = LabelCustomFormatter()
@@ -166,7 +166,7 @@ class ChartStatisticFragment :
                     it.getColor(R.color.Pink_200),
                     it.getColor(R.color.Pink_300),
                     it.getColor(R.color.Pink_400),
-                    it.getColor(R.color.Pink_500)
+                    it.getColor(R.color.Pink_500),
                 )
             }
             sliceSpace = 3f

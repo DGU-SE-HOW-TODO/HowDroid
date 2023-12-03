@@ -57,7 +57,7 @@ class MyFailTagActivity : BindingActivity<ActivityMyFailTagBinding>(R.layout.act
             val chip = inflater.inflate(
                 R.layout.view_fail_tag_chip,
                 binding.chipGroupMyFailTag,
-                false
+                false,
             ) as Chip
             chip.apply {
                 id = View.generateViewId() // 각 Chip에 고유한 ID 부여, TS
