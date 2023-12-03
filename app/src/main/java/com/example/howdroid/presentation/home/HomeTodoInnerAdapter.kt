@@ -15,6 +15,7 @@ import com.example.howdroid.util.extension.setVisible
 
 class HomeTodoInnerAdapter(
     private val onClick: TodoOptionClickListener,
+    private val checkToDo: TodoCheckClickListener,
 ) :
     ListAdapter<Home.TodoData, HomeTodoInnerAdapter.HomeTodoInnerViewHolder>(
         ItemDiffCallback<Home.TodoData>(
@@ -56,6 +57,9 @@ class HomeTodoInnerAdapter(
 
             binding.root.setOnSingleClickListener {
                 onClick.onOptionClick(todoItem)
+            }
+            binding.cbHomeTodo.setOnSingleClickListener {
+                checkToDo.onCheckClick(todoItem)
             }
         }
     }

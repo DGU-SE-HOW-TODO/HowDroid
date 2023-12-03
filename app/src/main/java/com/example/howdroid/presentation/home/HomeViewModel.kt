@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.domain.repository.HomeRepository
+import com.example.howdroid.domain.repository.ToDoRepository
 import com.example.howdroid.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val homeRepository: HomeRepository,
+    private val toDoRepository: ToDoRepository,
 ) : ViewModel() {
 
     private val _homeData = MutableLiveData<UiState<Home>>(UiState.Empty)
@@ -43,5 +45,11 @@ class HomeViewModel @Inject constructor(
 
     fun setSelectedDate(selectedDate: String) {
         _selectedDate.value = selectedDate
+    }
+
+    fun checkTodo(todoId: Long) {
+        viewModelScope.launch {
+            toDoRepository.checkToDo(todoId)
+        }
     }
 }

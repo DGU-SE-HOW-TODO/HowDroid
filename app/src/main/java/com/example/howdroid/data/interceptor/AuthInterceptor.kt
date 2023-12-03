@@ -1,5 +1,6 @@
 package com.example.howdroid.data.interceptor
 
+import android.util.Log
 import com.example.howdroid.data.datasource.local.HowDroidStorage
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -13,6 +14,7 @@ class AuthInterceptor @Inject constructor(
         val originalRequest = chain.request()
 
         val isAutoLogin = howDroidStorage.isLogin
+        Log.d("aaa", "${howDroidStorage.accessToken}")
 
         val authRequestBuilder = originalRequest.newBuilder()
         if (isAutoLogin) {

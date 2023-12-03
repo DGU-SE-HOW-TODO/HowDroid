@@ -25,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment :
     BindingFragment<FragmentHomeBinding>(R.layout.fragment_home),
     TodoOptionClickListener,
+    TodoCheckClickListener,
     HomeBottomSheetListener {
 
     private val homeViewModel by viewModels<HomeViewModel>()
@@ -34,6 +35,7 @@ class HomeFragment :
                 findNavController().navigate(R.id.navigation_addToDo)
             },
             onInnerItemClick = this,
+            onInnerToDoCheck = this,
         )
     }
 
@@ -49,6 +51,10 @@ class HomeFragment :
         val bottomSheetFragment = HomeBottomSheetFragment(todoItem)
         bottomSheetFragment.listener = this
         bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
+    }
+
+    override fun onCheckClick(todoItem: Home.TodoData) {
+        homeViewModel.checkTodo(todoItem.todoId.toLong())
     }
 
     private fun addListeners() {
