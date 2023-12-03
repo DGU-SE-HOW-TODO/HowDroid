@@ -1,6 +1,7 @@
 package com.example.howdroid.data.repository
 
 import com.example.howdroid.data.datasource.remote.HomeDataSource
+import com.example.howdroid.data.model.request.RequestPutFailTag
 import com.example.howdroid.data.model.request.RequestCategoryDto
 import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.domain.repository.HomeRepository
@@ -12,6 +13,14 @@ class HomeRepositoryImpl @Inject constructor(
 
     override suspend fun getHomeData(selectedDate: String): Result<Home> =
         runCatching { homeDataSource.getHomeData(selectedDate).toHome() }
+
+    override suspend fun putFailTag(
+        toDoId: Int,
+        requestPutFailTag: RequestPutFailTag
+    ): Result<Unit> =
+        runCatching {
+            homeDataSource.putFailTag(toDoId, requestPutFailTag)
+        }
 
     override suspend fun postCategory(requestCategoryDto: RequestCategoryDto): Result<Unit> =
         runCatching { homeDataSource.postCategory(requestCategoryDto) }

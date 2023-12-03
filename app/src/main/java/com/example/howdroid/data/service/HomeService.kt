@@ -1,10 +1,12 @@
 package com.example.howdroid.data.service
 
 import com.example.howdroid.data.model.request.RequestCategoryDto
+import com.example.howdroid.data.model.request.RequestPutFailTag
 import com.example.howdroid.data.model.response.ResponseHomeDto
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PATCH
 import retrofit2.http.Path
 
 interface HomeService {
@@ -17,5 +19,11 @@ interface HomeService {
     @POST("category")
     suspend fun postCategory(
         @Body requestCategoryDto: RequestCategoryDto,
+    )
+
+    @PATCH("/todo/failtag/{todoId}")
+    suspend fun putFailTag(
+        @Path("todoId") todoId: Int,
+        @Body requestPutFailTag: RequestPutFailTag
     )
 }
