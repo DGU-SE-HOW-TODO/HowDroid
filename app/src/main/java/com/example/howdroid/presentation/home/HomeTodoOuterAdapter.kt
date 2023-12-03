@@ -11,6 +11,7 @@ import com.example.howdroid.util.extension.setOnSingleClickListener
 
 class HomeTodoOuterAdapter(
     private val onInnerItemClick: TodoOptionClickListener,
+    private val onInnerToDoCheck: TodoCheckClickListener,
     private val moveToAddToDo: (Unit) -> Unit,
 ) :
     ListAdapter<Home.TodoCategoryData, HomeTodoOuterAdapter.HomeTodoOuterViewHolder>(
@@ -23,7 +24,7 @@ class HomeTodoOuterAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeTodoOuterViewHolder {
         val binding =
             ItemOuterHomeTodoListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HomeTodoOuterViewHolder(binding, onInnerItemClick)
+        return HomeTodoOuterViewHolder(binding, onInnerItemClick, onInnerToDoCheck)
     }
 
     override fun onBindViewHolder(holder: HomeTodoOuterViewHolder, position: Int) {
@@ -33,11 +34,13 @@ class HomeTodoOuterAdapter(
     inner class HomeTodoOuterViewHolder(
         private val binding: ItemOuterHomeTodoListBinding,
         onInnerItemClick: TodoOptionClickListener,
+        onInnerToDoCheck: TodoCheckClickListener,
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.rvInnerHomeTodoList.adapter = HomeTodoInnerAdapter(onInnerItemClick)
+            binding.rvInnerHomeTodoList.adapter =
+                HomeTodoInnerAdapter(onInnerItemClick, onInnerToDoCheck)
         }
 
         fun onBind(
