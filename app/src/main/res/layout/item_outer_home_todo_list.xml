@@ -9,7 +9,6 @@
         android:id="@+id/cl_home_category"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
         android:background="@drawable/bg_category"
         android:paddingVertical="7dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +58,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
+        android:layout_marginBottom="40dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/cl_home_category"
         app:layout_constraintTop_toBottomOf="@+id/cl_home_category"
         tools:listitem="@layout/item_inner_home_todo_list" />

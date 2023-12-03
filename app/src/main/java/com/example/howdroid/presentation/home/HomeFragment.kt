@@ -136,6 +136,11 @@ class HomeFragment :
         binding.tvToolbarTitle.text = postHomeTitle
     }
 
+    override fun onDestroyView() {
+        binding.rvOuterHomeTodoList.adapter = null
+        super.onDestroyView()
+    }
+
     companion object {
         const val TAG = "homeBottomSheetFragmentTag"
     }

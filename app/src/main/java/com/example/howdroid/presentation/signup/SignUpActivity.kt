@@ -14,6 +14,7 @@ import com.example.howdroid.util.binding.BindingActivity
 import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.example.howdroid.util.extension.setVisible
 import com.example.howdroid.util.extension.showSnackbar
+import com.example.howdroid.util.extension.showToast
 import com.example.howdroid.util.extension.startActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,6 +46,7 @@ class SignUpActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_
         signUpViewModel.isSignUp.observe(this) { uiState ->
             when (uiState) {
                 is UiState.Success -> {
+                    showToast(getString(R.string.signup_success))
                     startActivity<LoginActivity>()
                 }
 
