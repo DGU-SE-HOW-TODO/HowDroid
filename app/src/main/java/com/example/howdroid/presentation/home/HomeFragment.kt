@@ -41,7 +41,7 @@ class HomeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addListeners()
-        observeHomeData()
+        fetchHome()
         showAddCategory()
         addCategory()
         setupTouchEvents()
@@ -52,6 +52,7 @@ class HomeFragment :
             val categoryName = binding.etHomeAddCategoty.text.toString()
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 homeViewModel.postCategory(categoryName)
+                fetchHome()
                 true
             } else {
                 false
@@ -125,7 +126,8 @@ class HomeFragment :
         return false
     }
 
-    private fun observeHomeData() {
+    private fun fetchHome() {
+        homeViewModel.getHomeData()
         homeViewModel.homeData.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
                 is UiState.Success -> {
