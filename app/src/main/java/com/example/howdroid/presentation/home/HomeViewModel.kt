@@ -19,22 +19,29 @@ class HomeViewModel @Inject constructor(
 
     private val _homeData = MutableLiveData<UiState<Home>>(UiState.Empty)
     val homeData: LiveData<UiState<Home>> get() = _homeData
+    private val _selectedDate = MutableLiveData<String>(LocalDate.now().toString())
+    val selectedDate get() = _selectedDate
 
     init {
-        val today = LocalDate.now()
-        getHomeData(today.toString())
+        getHomeData()
     }
 
-    fun getHomeData(selectedDate: String) {
+    fun getHomeData() {
         viewModelScope.launch {
-            homeRepository.getHomeData(selectedDate)
-                .onSuccess {
-                    _homeData.value = UiState.Success(it)
-                }.onFailure { throwable ->
-                    _homeData.value = throwable.message?.let {
-                        UiState.Failure(it)
+            _selectedDate.value?.let {
+                homeRepository.getHomeData(it)
+                    .onSuccess {
+                        _homeData.value = UiState.Success(it)
+                    }.onFailure { throwable ->
+                        _homeData.value = throwable.message?.let {
+                            UiState.Failure(it)
+                        }
                     }
-                }
+            }
         }
+    }
+
+    fun setSelectedDate(selectedDate: String) {
+        _selectedDate.value = selectedDate
     }
 }
