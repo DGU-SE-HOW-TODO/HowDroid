@@ -8,4 +8,5 @@ interface HomeRepository {
 
     suspend fun getHomeData(selectedDate: String): Result<Home>
     suspend fun putFailTag(toDoId: Int, requestPutFailTag: RequestPutFailTag): Result<Unit>
+    suspend fun postCategory(requestCategoryDto: RequestCategoryDto): Result<Unit>
 }
