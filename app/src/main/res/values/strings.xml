@@ -26,6 +26,9 @@
     <string name="signup_password_check_hint">비밀번호를 확인해주세요</string>
     <string name="signup_password_check_message">비밀번호가 일치하지 않습니다</string>
     <string name="signup_btn">가입완료</string>
+    <string name="signup_email_duplication_fail">이미 존재하는 아이디 입니다</string>
+    <string name="signup_fail">회원가입 실패</string>
+    <string name="signup_success">회원가입 성공</string>
 
     <!--  calendar  -->
     <string name="calendar_week_description_mon">월</string>
@@ -86,7 +89,5 @@
     <string name="put_fail_tag_delayed_tomorrow">내일로 미루기</string>
     <string name="put_fail_tag_delay_tomorrow_error">실패태그를 선택한 경우에만 미루기가 가능해요.</string>
     <string name="login_auto">로그인 상태 유지</string>
-    <string name="signup_email_duplication_fail">이미 존재하는 아이디 입니다</string>
-    <string name="signup_fail">회원가입 실패</string>
 
 </resources>

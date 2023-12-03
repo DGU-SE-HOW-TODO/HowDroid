@@ -30,24 +30,13 @@ class LogInViewModel @Inject constructor(
                     loginPassword,
                 ),
             ).onSuccess { loginResponse ->
-                val responseHeader = loginResponse.headers()
-                val accessToken = responseHeader[AUTHORIZATION]
-                if (loginResponse.code() == 200) {
-                    howDroidStorage.accessToken = accessToken.toString()
-                    _loginState.value = UiState.Success(true)
-                    Log.d("aaa", "${howDroidStorage.accessToken}")
-                }
+                howDroidStorage.accessToken = loginResponse.accessToken
+                howDroidStorage.isLogin = true
+                Log.d("aaa", "${howDroidStorage.accessToken}")
+                _loginState.value = UiState.Success(true)
             }.onFailure { throwable ->
                 _loginState.value = throwable.message?.let { UiState.Failure(it) }
             }
         }
-    }
-
-    fun setAutoLogin() {
-        howDroidStorage.isLogin = true
-    }
-
-    companion object {
-        const val AUTHORIZATION = "Authorization"
     }
 }

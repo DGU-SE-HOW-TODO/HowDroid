@@ -7,5 +7,6 @@ import kotlinx.serialization.Serializable
 data class ResponseLoginDto(
     @SerialName("responseMessage")
     val responseMessage: String,
-
+    @SerialName("accessToken")
+    val accessToken: String,
 )

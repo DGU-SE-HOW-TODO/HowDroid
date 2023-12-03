@@ -8,7 +8,7 @@ import retrofit2.Response
 
 interface AuthRepository {
 
-    suspend fun login(requestLogin: RequestLoginDto): Result<Response<ResponseLoginDto>>
+    suspend fun login(requestLogin: RequestLoginDto): Result<ResponseLoginDto>
 
     suspend fun emailDuplication(email: String): Result<ResponseEmailDto>
 

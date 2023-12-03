@@ -44,7 +44,6 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         logInViewModel.loginState.observe(this) { uiState ->
             when (uiState) {
                 is UiState.Success -> {
-                    setAutoLogin()
                     startActivity<HomeActivity>()
                 }
 
@@ -54,12 +53,6 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
 
                 else -> Unit
             }
-        }
-    }
-
-    private fun setAutoLogin() {
-        if (binding.cbLoginAuto.isChecked) {
-            logInViewModel.setAutoLogin()
         }
     }
 

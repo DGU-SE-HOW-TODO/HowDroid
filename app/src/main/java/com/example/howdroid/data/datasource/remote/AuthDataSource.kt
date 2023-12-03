@@ -12,7 +12,7 @@ class AuthDataSource @Inject constructor(
     private val authService: AuthService,
 ) {
 
-    suspend fun login(requestLogin: RequestLoginDto): Response<ResponseLoginDto> =
+    suspend fun login(requestLogin: RequestLoginDto): ResponseLoginDto =
         authService.login(requestLogin)
 
     suspend fun emailDuplication(email: String): ResponseEmailDto =
