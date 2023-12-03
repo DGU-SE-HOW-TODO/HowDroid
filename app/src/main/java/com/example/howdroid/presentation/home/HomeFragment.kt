@@ -18,6 +18,7 @@ import com.example.howdroid.databinding.FragmentHomeBinding
 import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingFragment
+import com.example.howdroid.util.extension.hideKeyboard
 import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.example.howdroid.util.extension.setVisible
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,11 +49,12 @@ class HomeFragment :
     }
 
     private fun addCategory() {
-        binding.etHomeAddCategoty.setOnEditorActionListener { _, actionId, _ ->
+        binding.etHomeAddCategoty.setOnEditorActionListener { _, actionId, event ->
             val categoryName = binding.etHomeAddCategoty.text.toString()
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 homeViewModel.postCategory(categoryName)
                 fetchHome()
+                requireContext().hideKeyboard(binding.root)
                 true
             } else {
                 false
