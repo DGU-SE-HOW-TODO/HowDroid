@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.howdroid.data.model.request.RequestCategoryDto
 import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.domain.repository.HomeRepository
 import com.example.howdroid.util.UiState
@@ -38,6 +39,16 @@ class HomeViewModel @Inject constructor(
                         }
                     }
             }
+        }
+    }
+
+    fun postCategory(categoryName: String) {
+        viewModelScope.launch {
+            homeRepository.postCategory(
+                RequestCategoryDto(
+                    categoryName,
+                ),
+            )
         }
     }
 
