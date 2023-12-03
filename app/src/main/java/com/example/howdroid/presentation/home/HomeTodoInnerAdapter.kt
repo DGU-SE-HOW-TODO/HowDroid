@@ -55,6 +55,9 @@ class HomeTodoInnerAdapter(
                 binding.tvHomeFailTag.setVisible(GONE)
             }
 
+            if (todoItem.failtagName != null)
+                binding.cbHomeTodo.isEnabled = false
+
             binding.root.setOnSingleClickListener {
                 onClick.onOptionClick(todoItem)
             }
