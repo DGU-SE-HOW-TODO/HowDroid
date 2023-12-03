@@ -4,8 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RequestMyFailTag(
-    val month: Int,
+    val selectedDate: String,
     val selectedFailtagList: List<String>,
-    val week: Int,
-    val year: Int
 )
