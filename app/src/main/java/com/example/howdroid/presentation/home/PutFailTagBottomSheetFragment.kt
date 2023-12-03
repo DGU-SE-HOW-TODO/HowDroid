@@ -20,14 +20,18 @@ class PutFailTagBottomSheetFragment :
     BindingBottomSheetDialogFragment<FragmentBottomPutFaillTagBinding>(
         R.layout.fragment_bottom_put_faill_tag,
     ) {
-    private val viewModel: PutFailTagViewModel by viewModels()
+
+    private val failTagViewModel: PutFailTagViewModel by viewModels()
     lateinit var myFailTagList: MutableList<String>
     lateinit var selectedDate: String
+    var toDoId: Int = -1
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         selectedDate = arguments?.getString(SELECTED_DATE).toString()
-        viewModel.fetchMyFailTagList(selectedDate)
+        toDoId = arguments?.getInt(TODO_ID) ?: -1
+        failTagViewModel.fetchMyFailTagList(selectedDate)
 
         addListeners()
         observeData()
@@ -53,33 +57,33 @@ class PutFailTagBottomSheetFragment :
 
     private fun addListeners() {
         binding.btnCompletePutFailTag.setOnClickListener {
+            failTagViewModel.putFailTag(toDoId)
             dismiss()
         }
         binding.cbPutFailTagDelayTillTomorrow.setOnClickListener {
-            viewModel.setIsDelayedTomorrow()
+            failTagViewModel.setIsDelayedTomorrow()
         }
     }
 
     // TODO 로직 수정 필요, TS
     private fun observeData() {
-        // update selected chip
         binding.cgPutFailTag.setOnCheckedStateChangeListener { group, checkedId ->
             if (group.checkedChipId != -1) {
                 val checkedChip = group.findViewById<Chip>(group.checkedChipId)
                 val checkedChipTitle = checkedChip.text.toString()
                 for (chipTitleWithoutHashTag in myFailTagList) {
                     if (checkedChipTitle.contains(chipTitleWithoutHashTag)) {
-                        viewModel.setSelectedFailTag(chipTitleWithoutHashTag)
+                        failTagViewModel.setSelectedFailTag(chipTitleWithoutHashTag)
                     }
                 }
             } else {
-                viewModel.setSelectedFailTag(null)
+                failTagViewModel.setSelectedFailTag(null)
             }
         }
     }
 
     private fun collectData() {
-        viewModel.myFailTagList.flowWithLifecycle(lifecycle).onEach {
+        failTagViewModel.myFailTagList.flowWithLifecycle(lifecycle).onEach {
             when (it) {
                 is UiState.Success -> {
                     myFailTagList = it.data
@@ -89,17 +93,19 @@ class PutFailTagBottomSheetFragment :
                 else -> {}
             }
         }.launchIn(lifecycleScope)
-        viewModel.selectedFailTag.flowWithLifecycle(lifecycle).onEach { selectedFailTag ->
+        failTagViewModel.selectedFailTag.flowWithLifecycle(lifecycle).onEach { selectedFailTag ->
             binding.btnCompletePutFailTag.isEnabled = selectedFailTag != null
             binding.cbPutFailTagDelayTillTomorrow.isEnabled = selectedFailTag != null
             binding.tvDelayedTomorrow.isEnabled = selectedFailTag != null
         }.launchIn(lifecycleScope)
-        viewModel.isDelayedTomorrow.flowWithLifecycle(lifecycle).onEach { isDelayedTomorrow ->
-            binding.tvDelayedTomorrow.isSelected = isDelayedTomorrow
-        }.launchIn(lifecycleScope)
+        failTagViewModel.isDelayedTomorrow.flowWithLifecycle(lifecycle)
+            .onEach { isDelayedTomorrow ->
+                binding.tvDelayedTomorrow.isSelected = isDelayedTomorrow
+            }.launchIn(lifecycleScope)
     }
 
     companion object {
         const val SELECTED_DATE = "selectedDate"
+        const val TODO_ID = "todoId"
     }
 }
