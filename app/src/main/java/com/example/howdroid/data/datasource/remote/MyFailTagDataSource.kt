@@ -9,4 +9,7 @@ class MyFailTagDataSource @Inject constructor(
 ) {
     suspend fun setMyFailTag(requestMyFailTag: RequestMyFailTag) =
         myFailTagService.setMyFailTag(requestMyFailTag)
+
+    suspend fun fetchMyFailTag(selectedDate: String) =
+        myFailTagService.fetchMyFailTag(selectedDate)
 }
