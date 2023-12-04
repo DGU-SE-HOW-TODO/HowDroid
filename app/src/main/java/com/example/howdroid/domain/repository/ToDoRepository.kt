@@ -7,4 +7,6 @@ interface ToDoRepository {
     suspend fun checkToDo(toDoId: Long): Result<Unit>
 
     suspend fun addToDo(requestAddToDoDto: RequestAddToDoDto): Result<Unit>
+
+    suspend fun fixToDo(toDoId: Long): Result<Unit>
 }

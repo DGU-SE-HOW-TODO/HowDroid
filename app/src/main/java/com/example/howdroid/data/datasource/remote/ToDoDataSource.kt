@@ -12,4 +12,7 @@ class ToDoDataSource @Inject constructor(
 
     suspend fun addToDo(requestAddToDoDto: RequestAddToDoDto) =
         toDoService.addToDo(requestAddToDoDto)
+
+    suspend fun fixToDo(toDoId: Long) =
+        toDoService.fixToDo(toDoId)
 }

@@ -22,6 +22,7 @@ import com.example.howdroid.util.extension.hideKeyboard
 import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.example.howdroid.util.extension.setVisible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class HomeFragment :
@@ -31,7 +32,7 @@ class HomeFragment :
     HomeBottomSheetListener {
 
     private val homeViewModel by viewModels<HomeViewModel>()
-    var toDoId: Int = -1
+    private var toDoId by Delegates.notNull<Int>()
     private val outerAdapter by lazy {
         HomeTodoOuterAdapter(
             moveToAddToDo = { categoryId ->
@@ -95,9 +96,8 @@ class HomeFragment :
 
     private fun showPutFailTagBottomFragment() {
         val bottomSheetFragment = PutFailTagBottomSheetFragment()
-            .apply { putDataToBundle() }
             .apply {
-                val bundle = Bundle()
+                val bundle = putDataToBundle()
                 bundle.putInt(TODO_ID, this@HomeFragment.toDoId)
                 arguments = bundle
             }
