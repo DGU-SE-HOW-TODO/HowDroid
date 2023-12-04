@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import com.example.howdroid.R
 import com.example.howdroid.databinding.ActivityAddTodoBinding
 import com.example.howdroid.presentation.home.HomeFragment.Companion.CATEGORY_ID
@@ -27,7 +28,7 @@ class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activit
     private val addToDoViewModel: AddToDoViewModel by viewModels()
     private val errorMessageTextView by lazy { binding.tvAddTodoErrorMessage }
     lateinit var selectedDate: String
-    var categoryId by Delegates.notNull<Int>()
+    private var categoryId by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,16 @@ class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activit
                 binding.etAddTodo.text.toString(),
                 categoryId,
             )
+            moveToHomeFragment()
         }
+    }
+
+    private fun moveToHomeFragment() {
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
+        val navController = navHostFragment?.navController
+        navController?.navigate(R.id.navigation_home)
+        finish()
     }
 
     private fun observePriorityType() {
