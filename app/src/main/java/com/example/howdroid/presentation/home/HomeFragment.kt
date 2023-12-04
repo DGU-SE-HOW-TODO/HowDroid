@@ -54,11 +54,6 @@ class HomeFragment :
         setupTouchEvents()
     }
 
-    override fun onResume() {
-        super.onResume()
-        fetchHome()
-    }
-
     private fun addCategory() {
         binding.etHomeAddCategoty.setOnEditorActionListener { _, actionId, event ->
             val categoryName = binding.etHomeAddCategoty.text.toString()
