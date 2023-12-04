@@ -13,4 +13,7 @@ class ToDoRepositoryImpl @Inject constructor(
 
     override suspend fun addToDo(requestAddToDoDto: RequestAddToDoDto): Result<Unit> =
         runCatching { toDoDataSource.addToDo(requestAddToDoDto) }
+
+    override suspend fun fixToDo(toDoId: Long): Result<Unit> =
+        runCatching { toDoDataSource.fixToDo(toDoId) }
 }

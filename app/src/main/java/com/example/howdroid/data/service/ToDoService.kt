@@ -16,4 +16,9 @@ interface ToDoService {
     suspend fun addToDo(
         @Body requestAddToDoDto: RequestAddToDoDto,
     )
+
+    @PATCH("todo/fix/{todoId}")
+    suspend fun fixToDo(
+        @Path("todoId") todoId: Long,
+    )
 }
