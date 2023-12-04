@@ -1,8 +1,8 @@
 package com.example.howdroid.data.repository
 
 import com.example.howdroid.data.datasource.remote.HomeDataSource
-import com.example.howdroid.data.model.request.RequestPutFailTag
 import com.example.howdroid.data.model.request.RequestCategoryDto
+import com.example.howdroid.data.model.request.RequestPutFailTag
 import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.domain.repository.HomeRepository
 import javax.inject.Inject
@@ -16,7 +16,7 @@ class HomeRepositoryImpl @Inject constructor(
 
     override suspend fun putFailTag(
         toDoId: Int,
-        requestPutFailTag: RequestPutFailTag
+        requestPutFailTag: RequestPutFailTag,
     ): Result<Unit> =
         runCatching {
             homeDataSource.putFailTag(toDoId, requestPutFailTag)

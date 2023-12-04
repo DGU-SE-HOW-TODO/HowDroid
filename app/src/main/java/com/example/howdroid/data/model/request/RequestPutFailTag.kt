@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RequestPutFailTag(
     val failTagName: String,
-    val isDelay: Boolean
+    val isDelay: Boolean,
 )

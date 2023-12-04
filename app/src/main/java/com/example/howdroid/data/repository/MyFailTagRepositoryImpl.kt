@@ -7,7 +7,7 @@ import com.example.howdroid.domain.repository.MyFailTagRepository
 import javax.inject.Inject
 
 class MyFailTagRepositoryImpl @Inject constructor(
-    private val myFailTagDataSource: MyFailTagDataSource
+    private val myFailTagDataSource: MyFailTagDataSource,
 ) : MyFailTagRepository {
     override suspend fun setMyFailTag(requestMyFailTag: RequestMyFailTag): Result<Unit> =
         runCatching {
