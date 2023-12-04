@@ -38,6 +38,13 @@ class AddToDoActivity : BindingActivity<ActivityAddTodoBinding>(R.layout.activit
         setPriorityType()
         observePriorityType()
         postAddToDo()
+        clickBackButton()
+    }
+
+    private fun clickBackButton() {
+        binding.include.ivToolbarBack.setOnSingleClickListener {
+            finish()
+        }
     }
 
     private fun postAddToDo() {
