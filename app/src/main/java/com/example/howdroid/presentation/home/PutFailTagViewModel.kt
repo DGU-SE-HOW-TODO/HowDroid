@@ -1,6 +1,5 @@
 package com.example.howdroid.presentation.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.howdroid.data.model.request.RequestPutFailTag
@@ -43,13 +42,13 @@ class PutFailTagViewModel @Inject constructor(
     fun putFailTag(toDoId: Int) {
         viewModelScope.launch {
             homeRepository.putFailTag(
-                toDoId, RequestPutFailTag(
+                toDoId,
+                RequestPutFailTag(
                     _selectedFailTag.value.toString(),
                     _isDelayedTomorrow.value
                 )
             )
                 .onSuccess {
-                    Log.d("aaaa", "viewModel Success")
                     _isTagFailTag.value = UiState.Success(true)
                 }
                 .onFailure { throwable ->
