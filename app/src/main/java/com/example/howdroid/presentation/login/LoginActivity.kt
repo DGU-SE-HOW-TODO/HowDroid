@@ -1,6 +1,8 @@
 package com.example.howdroid.presentation.login
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import com.example.howdroid.R
@@ -12,6 +14,7 @@ import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingActivity
 import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.example.howdroid.util.extension.showSnackbar
+import com.example.howdroid.util.extension.showToast
 import com.example.howdroid.util.extension.startActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,9 +22,20 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
     private val logInViewModel by viewModels<LogInViewModel>()
-
     private var email: String = ""
     private var passWord: String = ""
+    private var backPressedTime = ZERO
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (System.currentTimeMillis() - backPressedTime <= TWO_SECONDS) {
+                finish()
+            } else {
+                backPressedTime = System.currentTimeMillis()
+                showToast(getString(R.string.application_terminate))
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +45,13 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         moveToSignUp()
         clickLoginBtn()
         observeLogin()
+        finishApplication()
     }
 
     private fun checkAutoLogin() {
         val howDroidStorage = HowDroidStorage(this)
         if (howDroidStorage.isLogin) {
-            startActivity<HomeActivity>()
+            moveToHome()
         }
     }
 
@@ -44,7 +59,7 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         logInViewModel.loginState.observe(this) { uiState ->
             when (uiState) {
                 is UiState.Success -> {
-                    startActivity<HomeActivity>()
+                    moveToHome()
                 }
 
                 is UiState.Failure -> {
@@ -58,7 +73,6 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
 
     private fun clickLoginBtn() {
         binding.btnLogin.setOnSingleClickListener {
-            // TODO 나중에 email, passWord 로 바꾸기
             logInViewModel.login(email, passWord)
         }
     }
@@ -67,6 +81,14 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
         binding.tvLoginSignup.setOnSingleClickListener {
             startActivity<SignUpActivity>()
         }
+    }
+
+    private fun moveToHome() {
+        val intent = Intent(this, HomeActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        showToast(getString(R.string.login_success))
+        startActivity(intent)
     }
 
     private fun setTextChangeListeners() {
@@ -81,5 +103,14 @@ class LoginActivity : BindingActivity<ActivityLoginBinding>(R.layout.activity_lo
             email = etLoginId.text.toString()
             passWord = etLoginPw.text.toString()
         }
+    }
+
+    private fun finishApplication() {
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+    }
+
+    companion object {
+        const val ZERO = 0L
+        const val TWO_SECONDS = 2000
     }
 }
