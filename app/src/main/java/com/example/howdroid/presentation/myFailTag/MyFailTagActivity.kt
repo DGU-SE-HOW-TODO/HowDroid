@@ -11,6 +11,7 @@ import com.example.howdroid.databinding.ActivityMyFailTagBinding
 import com.example.howdroid.presentation.type.FailTagType
 import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingActivity
+import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -25,6 +26,7 @@ class MyFailTagActivity : BindingActivity<ActivityMyFailTagBinding>(R.layout.act
         setMyFailTag()
         addListeners()
         addObserver()
+        clickBackButton()
     }
 
     private fun addListeners() {
@@ -78,6 +80,12 @@ class MyFailTagActivity : BindingActivity<ActivityMyFailTagBinding>(R.layout.act
                 text = String.format("# %s", getString(i.titleRes))
             }
             binding.chipGroupMyFailTag.addView(chip)
+        }
+    }
+
+    private fun clickBackButton() {
+        binding.myFailTagToolbar.ivToolbarBack.setOnSingleClickListener {
+            finish()
         }
     }
 }
