@@ -24,11 +24,19 @@ class HomeBottomSheetFragment(private val todoItem: Home.TodoData) :
         fixToDo()
     }
 
+    private fun observeFixToDo() {
+        homeBottomSheetViewModel.fixToDo.observe(viewLifecycleOwner) { result ->
+            if (result) {
+                dismiss()
+            }
+        }
+    }
+
     private fun fixToDo() {
         binding.clHomeTodoFix.setOnSingleClickListener {
             if (!todoItem.isFixed) {
                 homeBottomSheetViewModel.fixToDo(todoItem.todoId.toLong())
-                dismiss()
+                observeFixToDo()
             } else {
                 showSnackbar(binding.root, getString(R.string.home_todo_fix_fail_message))
             }
