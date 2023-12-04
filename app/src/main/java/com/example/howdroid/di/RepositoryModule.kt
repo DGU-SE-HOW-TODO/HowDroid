@@ -1,10 +1,12 @@
 package com.example.howdroid.di
 
 import com.example.howdroid.data.repository.AuthRepositoryImpl
+import com.example.howdroid.data.repository.ChartRepositoryImpl
 import com.example.howdroid.data.repository.HomeRepositoryImpl
 import com.example.howdroid.data.repository.MyFailTagRepositoryImpl
 import com.example.howdroid.data.repository.ToDoRepositoryImpl
 import com.example.howdroid.domain.repository.AuthRepository
+import com.example.howdroid.domain.repository.ChartRepository
 import com.example.howdroid.domain.repository.HomeRepository
 import com.example.howdroid.domain.repository.MyFailTagRepository
 import com.example.howdroid.domain.repository.ToDoRepository
@@ -37,4 +39,9 @@ object RepositoryModule {
     @Singleton
     fun providesToDoRepository(toDoRepositoryImpl: ToDoRepositoryImpl): ToDoRepository =
         toDoRepositoryImpl
+
+    @Provides
+    @Singleton
+    fun providesChartRepository(chartRepositoryImpl: ChartRepositoryImpl): ChartRepository =
+        chartRepositoryImpl
 }
