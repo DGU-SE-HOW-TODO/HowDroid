@@ -71,6 +71,19 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_home_fix_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/home_todo_fix_imogi"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_home_todo_option"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="@+id/iv_home_todo_option" />
+
+
         <ImageView
             android:id="@+id/iv_home_todo_option"
             android:layout_width="wrap_content"

@@ -46,6 +46,7 @@
     <string name="home_title">오늘 할 일 %d% 달성</string>
     <string name="home_todo_detail_todo_fix">📌 TO DO 고정하기</string>
     <string name="home_todo_detail_failtag">🏷️ 실패 태그 달기</string>
+    <string name="home_todo_fix_fail_message">이미 고정된 TODO 입니다.</string>
 
     <!--  addToDO  -->
     <string name="add_todo_toolbar_title">TODO 생성</string>
@@ -93,5 +94,6 @@
     <string name="put_fail_tag_delay_tomorrow_error">실패태그를 선택한 경우에만 미루기가 가능해요.</string>
     <string name="login_auto">로그인 상태 유지</string>
     <string name="signup_email_duplication">이미 존재하는 이메일 입니다</string>
+    <string name="home_todo_fix_imogi">📌</string>
 
 </resources>
