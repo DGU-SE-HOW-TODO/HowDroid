@@ -2,6 +2,8 @@ package com.example.howdroid.presentation.home
 
 import android.view.LayoutInflater
 import android.view.View.GONE
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
@@ -55,14 +57,20 @@ class HomeTodoInnerAdapter(
                 binding.tvHomeFailTag.setVisible(GONE)
             }
 
-            if (todoItem.failtagName != null)
+            if (todoItem.failtagName != null) {
                 binding.cbHomeTodo.isEnabled = false
+            }
 
             binding.root.setOnSingleClickListener {
                 onClick.onOptionClick(todoItem)
             }
             binding.cbHomeTodo.setOnSingleClickListener {
                 checkToDo.onCheckClick(todoItem)
+            }
+            if (todoItem.isFixed) {
+                binding.tvHomeFixTag.setVisible(VISIBLE)
+            } else {
+                binding.tvHomeFixTag.setVisible(INVISIBLE)
             }
         }
     }
