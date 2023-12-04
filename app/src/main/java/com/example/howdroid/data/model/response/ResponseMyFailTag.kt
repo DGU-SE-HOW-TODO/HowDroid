@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResponseMyFailTag(
-    val failtags: List<String>
+    val failtags: List<String>,
 )
