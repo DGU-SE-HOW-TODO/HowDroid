@@ -14,17 +14,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/iv_check"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_check_imogi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tv_achievement_rate_des"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="24dp"
                 android:text="@string/chart_statistic_achievement_rate_des"
                 android:textAppearance="@style/Body_M1"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_check"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/iv_check"
+                app:layout_constraintTop_toTopOf="@+id/iv_check" />
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/bar_chart_achievement_rate"
@@ -43,17 +54,28 @@
                 android:background="@color/Gray_200"
                 app:layout_constraintTop_toBottomOf="@id/bar_chart_achievement_rate" />
 
+            <ImageView
+                android:id="@+id/iv_check2"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_check_imogi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_line1" />
+
             <TextView
                 android:id="@+id/tv_category_rate_des"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="24dp"
                 android:text="@string/chart_statistic_category_des"
                 android:textAppearance="@style/Body_M1"
+                app:layout_constraintBottom_toBottomOf="@id/iv_check2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_line1" />
+                app:layout_constraintStart_toEndOf="@+id/iv_check2"
+                app:layout_constraintTop_toTopOf="@+id/iv_check2" />
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pie_chart_category_rate"
@@ -71,17 +93,27 @@
                 android:background="@color/Gray_200"
                 app:layout_constraintTop_toBottomOf="@id/pie_chart_category_rate" />
 
+            <ImageView
+                android:id="@+id/iv_check3"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_check_imogi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_line2" />
+
             <TextView
                 android:id="@+id/tv_fail_tag_rate_des"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="30dp"
-                android:text="@string/chrat_statistic_fail_tag_des"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/chart_statistic_fail_tag_des"
                 android:textAppearance="@style/Body_M1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_line2" />
+                app:layout_constraintStart_toEndOf="@id/iv_check2"
+                app:layout_constraintTop_toTopOf="@+id/iv_check3" />
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pie_chart_fail_tag_rate"

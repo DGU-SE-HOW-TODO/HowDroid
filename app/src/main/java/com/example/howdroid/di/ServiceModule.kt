@@ -1,6 +1,7 @@
 package com.example.howdroid.di
 
 import com.example.howdroid.data.service.AuthService
+import com.example.howdroid.data.service.ChartService
 import com.example.howdroid.data.service.HomeService
 import com.example.howdroid.data.service.MyFailTagService
 import com.example.howdroid.data.service.ToDoService
@@ -31,4 +32,8 @@ object ServiceModule {
     @Provides
     @Singleton
     fun provideToDoService(retrofit: Retrofit): ToDoService = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideChartService(retrofit: Retrofit): ChartService = retrofit.create()
 }
