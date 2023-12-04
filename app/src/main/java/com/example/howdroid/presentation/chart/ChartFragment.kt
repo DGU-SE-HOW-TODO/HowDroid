@@ -3,12 +3,14 @@ package com.example.howdroid.presentation.chart
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.howdroid.R
 import com.example.howdroid.databinding.FragmentChartBinding
 import com.example.howdroid.util.binding.BindingFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ChartFragment : BindingFragment<FragmentChartBinding>(R.layout.fragment_chart) {
+    private val viewModel: ChartViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

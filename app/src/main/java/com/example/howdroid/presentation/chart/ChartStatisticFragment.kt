@@ -2,8 +2,13 @@ package com.example.howdroid.presentation.chart
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Html
 import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.example.howdroid.R
+import com.example.howdroid.data.model.response.ResponseStatistic
 import com.example.howdroid.databinding.FragmentChartStatisticBinding
 import com.example.howdroid.util.binding.BindingFragment
 import com.github.mikephil.charting.charts.BarChart
@@ -16,23 +21,65 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
+@AndroidEntryPoint
 class ChartStatisticFragment :
     BindingFragment<FragmentChartStatisticBinding>(R.layout.fragment_chart_statistic) {
+    private val viewModel: ChartViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val achievementRateBarChart: BarChart = binding.barChartAchievementRate
-        val barList = setAchievementRateData(achievementRateBarChart)
-        setAchievementRateBarChart(achievementRateBarChart, barList)
+        collectData()
+    }
 
-        val categoryRatePieChart: PieChart = binding.pieChartCategoryRate
-        val categoryPieList = setCategporyRateData()
-        setCategoryRatePieChart(categoryRatePieChart, categoryPieList)
-
-        val failTagRatePieChart: PieChart = binding.pieChartFailTagRate
-        val failTagPieList = setFailTagRateData()
-        setFailTagRatePieChart(failTagRatePieChart, failTagPieList)
+    private fun collectData() {
+        viewModel.rateOfChange.flowWithLifecycle(lifecycle).onEach { rateOfChange ->
+            val rateString = String.format("%d%%", rateOfChange)
+            val formattedString = getString(
+                R.string.chart_statistic_achievement_rate_des,
+                Html.fromHtml(rateString, Html.FROM_HTML_MODE_LEGACY)
+            )
+            binding.tvAchievementRateDes.text =
+                Html.fromHtml(formattedString, Html.FROM_HTML_MODE_LEGACY)
+        }.launchIn(lifecycleScope)
+        viewModel.nowToDoAchievementRate.flowWithLifecycle(lifecycle)
+            .onEach { nowToDoAchievementRate ->
+                val achievementRateBarChart: BarChart = binding.barChartAchievementRate
+                val barList =
+                    setAchievementRateData(
+                        viewModel.preToDoAchievementRate.value,
+                        nowToDoAchievementRate
+                    )
+                setAchievementRateBarChart(achievementRateBarChart, barList)
+            }.launchIn(lifecycleScope)
+        viewModel.nowBestCategory.flowWithLifecycle(lifecycle).onEach { nowBestCategory ->
+            val content = getString(
+                R.string.chart_statistic_category_des,
+                Html.fromHtml(nowBestCategory, Html.FROM_HTML_MODE_LEGACY)
+            )
+            binding.tvCategoryRateDes.text = Html.fromHtml(content, Html.FROM_HTML_MODE_LEGACY)
+        }.launchIn(lifecycleScope)
+        viewModel.nowCategoryRateList.flowWithLifecycle(lifecycle).onEach { nowCategoryRateList ->
+            val categoryRatePieChart: PieChart = binding.pieChartCategoryRate
+            val categoryPieList = setCategoryRateData(nowCategoryRateList)
+            setCategoryRatePieChart(categoryRatePieChart, categoryPieList)
+        }.launchIn(lifecycleScope)
+        viewModel.nowWorstFailTag.flowWithLifecycle(lifecycle).onEach { nowWorstFailTag ->
+            val content = getString(
+                R.string.chart_statistic_fail_tag_des,
+                Html.fromHtml(nowWorstFailTag, Html.FROM_HTML_MODE_LEGACY)
+            )
+            binding.tvFailTagRateDes.text = Html.fromHtml(content, Html.FROM_HTML_MODE_LEGACY)
+        }.launchIn(lifecycleScope)
+        viewModel.nowFailTagList.flowWithLifecycle(lifecycle).onEach { nowFailTagList ->
+            val failTagRatePieChart: PieChart = binding.pieChartFailTagRate
+            val failTagPieList = setFailTagRateData(nowFailTagList)
+            setFailTagRatePieChart(failTagRatePieChart, failTagPieList)
+        }.launchIn(lifecycleScope)
     }
 
     private fun setAchievementRateBarChart(barChart: BarChart, barList: ArrayList<BarEntry>) {
@@ -90,11 +137,10 @@ class ChartStatisticFragment :
         barChart.invalidate()
     }
 
-    private fun setAchievementRateData(barChart: BarChart): ArrayList<BarEntry> {
+    private fun setAchievementRateData(prePercent: Int, nowPercent: Int): ArrayList<BarEntry> {
         val barList = ArrayList<BarEntry>()
-        // 임시 데이터 연동
-        barList.add(BarEntry(1f, 60f))
-        barList.add(BarEntry(2f, 100f))
+        barList.add(BarEntry(1f, prePercent.toFloat()))
+        barList.add(BarEntry(2f, nowPercent.toFloat()))
 
         return barList
     }
@@ -135,13 +181,17 @@ class ChartStatisticFragment :
         pieChart.invalidate()
     }
 
-    private fun setCategporyRateData(): ArrayList<PieEntry> {
+    private fun setCategoryRateData(nowCategoryRateList: MutableList<ResponseStatistic.NowCategoryDate>): ArrayList<PieEntry> {
         val pieList = ArrayList<PieEntry>()
 
-        pieList.add(PieEntry(28f, "취미"))
-        pieList.add(PieEntry(32f, "운동"))
-        pieList.add(PieEntry(40f, "공부"))
-
+        for (nowCategoryRate in nowCategoryRateList) {
+            pieList.add(
+                PieEntry(
+                    nowCategoryRate.nowCategoryRate.toFloat(),
+                    nowCategoryRate.nowCategory
+                )
+            )
+        }
         return pieList
     }
 
@@ -183,14 +233,12 @@ class ChartStatisticFragment :
         pieChart.invalidate()
     }
 
-    private fun setFailTagRateData(): ArrayList<PieEntry> {
+    private fun setFailTagRateData(failTagList: MutableList<ResponseStatistic.NowFailtag>): ArrayList<PieEntry> {
         val pieList = ArrayList<PieEntry>()
 
-        pieList.add(PieEntry(5f, "잠"))
-        pieList.add(PieEntry(10f, "일정변경"))
-        pieList.add(PieEntry(20f, "갑작스런일정"))
-        pieList.add(PieEntry(30f, "무리한계획"))
-        pieList.add(PieEntry(35f, "의지박약"))
+        for (failTag in failTagList) {
+            pieList.add(PieEntry(failTag.nowFailtagRate.toFloat(), failTag.nowFailtag))
+        }
 
         return pieList
     }

@@ -105,6 +105,7 @@ class HomeFragment :
     private fun showPutFailTagBottomFragment() {
         val bottomSheetFragment = PutFailTagBottomSheetFragment()
             .apply {
+                // TODO putDataToBundle() 삭제
                 val bundle = putDataToBundle()
                 bundle.putInt(TODO_ID, this@HomeFragment.toDoId)
                 arguments = bundle
