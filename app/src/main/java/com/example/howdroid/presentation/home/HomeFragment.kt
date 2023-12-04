@@ -52,6 +52,14 @@ class HomeFragment :
         showAddCategory()
         addCategory()
         setupTouchEvents()
+        refreshHome()
+    }
+
+    private fun refreshHome() {
+        binding.refresh.setOnRefreshListener {
+            fetchHome()
+            binding.refresh.isRefreshing = false
+        }
     }
 
     private fun addCategory() {
