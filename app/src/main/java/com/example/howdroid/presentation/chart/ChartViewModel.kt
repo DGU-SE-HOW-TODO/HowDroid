@@ -2,6 +2,7 @@ package com.example.howdroid.presentation.chart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.howdroid.data.model.response.ResponseFeedBack
 import com.example.howdroid.data.model.response.ResponseStatistic
 import com.example.howdroid.domain.repository.ChartRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,8 +37,13 @@ class ChartViewModel @Inject constructor(
     private val _nowWorstFailTag = MutableStateFlow("")
     val nowWorstFailTag get() = _nowWorstFailTag.asStateFlow()
 
+    private val _feedBackContent = MutableStateFlow<ResponseFeedBack?>(null)
+    val feedBackContent get() = _feedBackContent.asStateFlow()
+
+
     init {
         fetchStatistic()
+        fetchFeedBack()
     }
 
     // TODO 초기화 유사한 거 끼리 함수화
@@ -59,6 +65,19 @@ class ChartViewModel @Inject constructor(
                     _nowFailTagList.value = chartInfo.nowFailtagList.toMutableList()
                     _nowBestCategory.value = chartInfo.nowBestCategory
                     _nowWorstFailTag.value = chartInfo.nowWorstFailtag
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable.message)
+                }
+        }
+    }
+
+    private fun fetchFeedBack() {
+        val today = LocalDate.now().toString()
+        viewModelScope.launch {
+            chartRepository.fetchFeedBack(today)
+                .onSuccess { feedBackContent ->
+                    _feedBackContent.value = feedBackContent
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
