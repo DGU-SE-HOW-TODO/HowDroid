@@ -1,4 +1,4 @@
-package com.example.howdroid.presentation.myFailTag
+package com.example.howdroid.presentation.myfailtag
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

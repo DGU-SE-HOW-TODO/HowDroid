@@ -1,4 +1,4 @@
-package com.example.howdroid.presentation.myFailTag
+package com.example.howdroid.presentation.myfailtag
 
 import android.os.Bundle
 import android.view.LayoutInflater

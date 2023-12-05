@@ -69,7 +69,7 @@
             app:layout_constraintStart_toStartOf="@id/et_add_todo"
             app:layout_constraintTop_toBottomOf="@+id/et_add_todo" />
 
-        <com.example.howdroid.presentation.CustomPriorityChip
+        <com.example.howdroid.presentation.addtodo.CustomPriorityChip
             android:id="@+id/custom_chip_most_important"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             app:selectedBackgroundResource="@drawable/background_priority_most_important_selected"
             app:selectedColor="@color/Orange" />
 
-        <com.example.howdroid.presentation.CustomPriorityChip
+        <com.example.howdroid.presentation.addtodo.CustomPriorityChip
             android:id="@+id/custom_chip_important"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
             app:selectedBackgroundResource="@drawable/background_priority_important_selected"
             app:selectedColor="@color/Green_400" />
 
-        <com.example.howdroid.presentation.CustomPriorityChip
+        <com.example.howdroid.presentation.addtodo.CustomPriorityChip
             android:id="@+id/custom_chip_not_important"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

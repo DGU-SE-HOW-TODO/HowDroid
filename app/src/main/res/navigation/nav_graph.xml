@@ -22,10 +22,10 @@
         android:label="MyPageFragment" />
     <activity
         android:id="@+id/myFailTagActivity"
-        android:name="com.example.howdroid.presentation.myFailTag.MyFailTagActivity"
+        android:name="com.example.howdroid.presentation.myfailtag.MyFailTagActivity"
         android:label="MyFailTagActivity" />
     <activity
         android:id="@+id/navigation_addToDo"
-        android:name="com.example.howdroid.presentation.AddToDoActivity"
+        android:name="com.example.howdroid.presentation.addtodo.AddToDoActivity"
         android:label="AddToDoActivity" />
 </navigation>
