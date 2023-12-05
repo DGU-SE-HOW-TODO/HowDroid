@@ -4,6 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResponseFeedBack(
+    val month: Int,
+    val week: Int,
     val delayDetailMessage: String,
     val delayMessage: String,
     val firstPriPercent: Int,

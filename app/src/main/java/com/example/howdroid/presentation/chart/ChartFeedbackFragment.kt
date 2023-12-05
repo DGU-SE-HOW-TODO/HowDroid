@@ -31,6 +31,7 @@ class ChartFeedbackFragment :
     private fun collectData() {
         viewModel.feedBackContent.flowWithLifecycle(lifecycle).onEach { feedBackContent ->
             with(binding) {
+                binding.tvFeedbackTitle.text = String.format("%d주차 피드백", feedBackContent?.week)
                 if (feedBackContent?.rateMessage != null) {
                     feedBackContent.also {
                         tvChartRateTitle.text = it.rateMessage
