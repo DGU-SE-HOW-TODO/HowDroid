@@ -40,7 +40,6 @@ class ChartViewModel @Inject constructor(
     private val _feedBackContent = MutableStateFlow<ResponseFeedBack?>(null)
     val feedBackContent get() = _feedBackContent.asStateFlow()
 
-
     init {
         fetchStatistic()
         fetchFeedBack()
@@ -84,5 +83,4 @@ class ChartViewModel @Inject constructor(
                 }
         }
     }
-
 }
