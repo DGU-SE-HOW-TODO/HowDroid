@@ -48,9 +48,4 @@ class ChartFragment : BindingFragment<FragmentChartBinding>(R.layout.fragment_ch
             }
         }.launchIn(lifecycleScope)
     }
-
-//    override fun onDestroyView() {
-//        binding.vpChart.adapter = null
-//        super.onDestroyView()
-//    }
 }
