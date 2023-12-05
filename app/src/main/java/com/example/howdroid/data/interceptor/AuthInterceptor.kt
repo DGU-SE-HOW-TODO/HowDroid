@@ -14,7 +14,6 @@ class AuthInterceptor @Inject constructor(
         val originalRequest = chain.request()
 
         val isAutoLogin = howDroidStorage.isLogin
-        Log.d("aaa", "${howDroidStorage.accessToken}")
 
         val authRequestBuilder = originalRequest.newBuilder()
         if (isAutoLogin) {
