@@ -1,23 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="여기는 피드백"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/iv_check"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_check_imogi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_feedback_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="이번주차 피드백"
+                android:textAppearance="@style/Body_M1"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_check"
+                app:layout_constraintStart_toEndOf="@+id/iv_check"
+                app:layout_constraintTop_toTopOf="@+id/iv_check" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_feedback_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@color/Gray_100"
+                android:paddingVertical="24dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_feedback_title">
+
+                <TextView
+                    android:id="@+id/tv_chart_rate_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:textAppearance="@style/Body_B1"
+                    android:textColor="@color/Green_400"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="저번 주에 비해 목표 달성률이 5% 올랐지만, 여전히 목표 달성률이 절반을 넘지 못했어요." />
+
+
+                <TextView
+                    android:id="@+id/tv_chart_rate_des"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/Body_M2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_chart_rate_title"
+                    tools:text="이번 주 Todo 리스트를 보니, 아쉽게도 한 주 동안 목표의 절반을 달성하지 못했네요.
+지금도 충분히 잘하고 있지만 욕심을 조금 버리고 조금 더 현실적인 목표를 세워보는 것은 어떨까요? 목표를 조금 더 세분화하여 계획하고 이를 차근차근 달성하면 성취감을 느끼실 거예요. 목표치 만큼 TODO를 다 수행하지 못했다고 실망해하지 마세요. 습관을 극복하는데 중요한 건 자신을 비난하지 않는 것입니다. 포기하지 말고 다음 주를 기대해봐요!" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_feedback_priority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@color/Gray_100"
+                android:paddingVertical="24dp"
+                app:layout_constraintTop_toBottomOf="@id/layout_feedback_rate">
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/bar_chart_priority_rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_chart_priority_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/Body_B1"
+                    android:textColor="@color/Green_400"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bar_chart_priority_rate"
+                    tools:text="우선순위가 가장 높은 계획을 처리하지 못하셨군요." />
+
+                <TextView
+                    android:id="@+id/tv_chart_priority_des"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/Body_M2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_chart_priority_title"
+                    tools:text="계획을 세우는 것만큼 계획에 맞게 실행하는 것도 중요합니다! 다음번엔 중요한 일 먼저 실행하도록 노력해봐요!" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_feedback_delayed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/Gray_100"
+                android:paddingVertical="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_feedback_priority">
+
+
+                <TextView
+                    android:id="@+id/tv_chart_delayed_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:textAppearance="@style/Body_B1"
+                    android:textColor="@color/Green_400"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="이번 주에는 전체 계획 중 미룬 계획이 15개나 있어요. 가장 자주 미룬 카테고리는 “공부”에요." />
+
+                <TextView
+                    android:id="@+id/tv_chart_delayed_des"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="@style/Body_M2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_chart_delayed_title"
+                    tools:text="미루는 습관을 극복하려면 때로는 할 일을 잘게 쪼개서 작고 잦은 성공 반복하기이 도움이 된다고 해요" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
