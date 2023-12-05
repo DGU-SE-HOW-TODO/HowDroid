@@ -78,13 +78,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:background="@color/Gray_100"
-                android:paddingVertical="24dp"
+                android:paddingBottom="24dp"
                 app:layout_constraintTop_toBottomOf="@id/layout_feedback_rate">
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/bar_chart_priority_rate"
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"
+                    android:layout_height="200dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
