@@ -85,6 +85,7 @@
                     android:id="@+id/bar_chart_priority_rate"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

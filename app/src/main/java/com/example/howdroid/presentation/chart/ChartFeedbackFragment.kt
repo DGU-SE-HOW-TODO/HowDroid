@@ -41,6 +41,7 @@ class ChartFeedbackFragment :
                     tvChartRateDes.text = feedBackContent.rateDetailMessage
                 }
                 if (feedBackContent?.priorityMessage != null) {
+                    barChartPriorityRate.visibility = View.VISIBLE
                     tvChartPriorityTitle.text = feedBackContent.priorityMessage
                     tvChartPriorityDes.text = feedBackContent.priorityDetailMessage
                 }
