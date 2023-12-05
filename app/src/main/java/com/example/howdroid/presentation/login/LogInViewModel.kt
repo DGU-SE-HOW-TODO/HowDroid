@@ -32,7 +32,6 @@ class LogInViewModel @Inject constructor(
             ).onSuccess { loginResponse ->
                 howDroidStorage.accessToken = loginResponse.accessToken
                 howDroidStorage.isLogin = true
-                Log.d("aaa", "${howDroidStorage.accessToken}")
                 _loginState.value = UiState.Success(true)
             }.onFailure { throwable ->
                 _loginState.value = throwable.message?.let { UiState.Failure(it) }
