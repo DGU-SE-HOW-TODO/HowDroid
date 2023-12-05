@@ -162,9 +162,9 @@ class ChartStatisticFragment :
         pieDataSet.run {
             colors = context?.let {
                 listOf(
-                    it.getColor(R.color.Gray_200),
-                    it.getColor(R.color.Green_200),
                     it.getColor(R.color.Green_300),
+                    it.getColor(R.color.Green_200),
+                    it.getColor(R.color.Gray_200),
                 )
             }
             sliceSpace = 3f
@@ -174,7 +174,7 @@ class ChartStatisticFragment :
         data.run {
             setValueFormatter(IntegerPercentFormatter())
             context?.getColor(R.color.Gray_50)?.let { setValueTextColor(it) }
-            setValueTextSize(13f)
+            setValueTextSize(12f)
             setValueTypeface(Typeface.DEFAULT_BOLD)
         }
         pieChart.data = data
@@ -212,11 +212,11 @@ class ChartStatisticFragment :
         pieDataSet.run {
             colors = context?.let {
                 listOf(
-                    it.getColor(R.color.Gray_200),
-                    it.getColor(R.color.Pink_200),
-                    it.getColor(R.color.Pink_300),
-                    it.getColor(R.color.Pink_400),
                     it.getColor(R.color.Pink_500),
+                    it.getColor(R.color.Pink_400),
+                    it.getColor(R.color.Pink_300),
+                    it.getColor(R.color.Pink_200),
+                    it.getColor(R.color.Gray_200),
                 )
             }
             sliceSpace = 3f
@@ -226,7 +226,7 @@ class ChartStatisticFragment :
         data.run {
             setValueFormatter(IntegerPercentFormatter())
             context?.getColor(R.color.Gray_50)?.let { setValueTextColor(it) }
-            setValueTextSize(13f)
+            setValueTextSize(12f)
             setValueTypeface(Typeface.DEFAULT_BOLD)
         }
         pieChart.data = data
