@@ -1,4 +1,4 @@
-# * ✅ HOW TO DO - AOS ✅ *
+# *✅ HOW TO DO - AOS ✅*
 
 
 ##  *****✅  HOW TO DO*****
