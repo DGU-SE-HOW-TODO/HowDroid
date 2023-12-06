@@ -11,7 +11,10 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.howdroid.R
 import com.example.howdroid.databinding.FragmentHomeBinding
@@ -22,6 +25,8 @@ import com.example.howdroid.util.extension.hideKeyboard
 import com.example.howdroid.util.extension.setOnSingleClickListener
 import com.example.howdroid.util.extension.setVisible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
@@ -32,7 +37,9 @@ class HomeFragment :
     HomeBottomSheetListener {
 
     private val homeViewModel by viewModels<HomeViewModel>()
+    private val failTagViewModel: PutFailTagViewModel by activityViewModels()
     private var toDoId by Delegates.notNull<Int>()
+    private lateinit var failTagBottomSheet: PutFailTagBottomSheetFragment
     private val outerAdapter by lazy {
         HomeTodoOuterAdapter(
             moveToAddToDo = { categoryId ->
@@ -53,6 +60,7 @@ class HomeFragment :
         addCategory()
         setupTouchEvents()
         refreshHome()
+        collectData()
     }
 
     private fun refreshHome() {
@@ -103,14 +111,15 @@ class HomeFragment :
     }
 
     private fun showPutFailTagBottomFragment() {
-        val bottomSheetFragment = PutFailTagBottomSheetFragment()
+        failTagBottomSheet = PutFailTagBottomSheetFragment()
+        failTagBottomSheet
             .apply {
                 // TODO putDataToBundle() 삭제
                 val bundle = putDataToBundle()
                 bundle.putInt(TODO_ID, this@HomeFragment.toDoId)
                 arguments = bundle
             }
-        bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
+        failTagBottomSheet.show(childFragmentManager, failTagBottomSheet.tag)
         binding.clHomeAddCategory.setVisible(GONE)
     }
 
@@ -171,6 +180,19 @@ class HomeFragment :
         homeViewModel.selectedDate.observe(viewLifecycleOwner) {
             homeViewModel.getHomeData()
         }
+    }
+
+    private fun collectData() {
+        failTagViewModel.isTagFailTag.flowWithLifecycle(lifecycle).onEach {
+            when (it) {
+                is UiState.Success -> {
+                    homeViewModel.getHomeData()
+                    failTagBottomSheet.dismiss()
+                }
+
+                else -> {}
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun setHomeTitle(rateOfSuccess: Int) {
