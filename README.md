@@ -34,7 +34,7 @@
 | Architecture | Clean Architecture, MVVM |
 | --- | --- |
 | Design Pattern | Repository Pattern, Adapter Pattern,  Delegation Pattern, Observer Pattern |
-| Jetpack Components | encryptedsharedpreferences, LiveData, Lifecycle, ViewModel, AntiDataBinding |
+| Jetpack Components | encryptedsharedpreferences, LiveData, Lifecycle, ViewModel |
 | Dependency Injection | Hilt |
 | Network | Retrofit, OkHttp |
 | Asynchronous Processing | Coroutine(+ Flow) |
