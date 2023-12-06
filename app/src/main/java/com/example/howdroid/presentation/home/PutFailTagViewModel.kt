@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PutFailTagViewModel @Inject constructor(
     private val myFailTagRepository: MyFailTagRepository,
-    private val homeRepository: HomeRepository
+    private val homeRepository: HomeRepository,
 ) : ViewModel() {
     private val _myFailTagList = MutableStateFlow<UiState<MutableList<String>>>(UiState.Loading)
     val myFailTagList get() = _myFailTagList.asStateFlow()
@@ -45,8 +45,8 @@ class PutFailTagViewModel @Inject constructor(
                 toDoId,
                 RequestPutFailTag(
                     _selectedFailTag.value.toString(),
-                    _isDelayedTomorrow.value
-                )
+                    _isDelayedTomorrow.value,
+                ),
             )
                 .onSuccess {
                     _isTagFailTag.value = UiState.Success(true)

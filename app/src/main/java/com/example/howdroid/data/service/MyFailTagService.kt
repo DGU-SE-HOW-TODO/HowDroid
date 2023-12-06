@@ -15,6 +15,6 @@ interface MyFailTagService {
 
     @GET("/failtag/{selectedDate}")
     suspend fun fetchMyFailTag(
-        @Path("selectedDate") selectedDate: String
+        @Path("selectedDate") selectedDate: String,
     ): ResponseMyFailTag
 }

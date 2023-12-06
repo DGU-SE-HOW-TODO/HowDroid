@@ -58,17 +58,21 @@ class ChartFragment : BindingFragment<FragmentChartBinding>(R.layout.fragment_ch
             val day = selectedDate[2]
 
             val preDate =
-                if (day.toInt() - 7 < 0) String.format(
-                    "%s-%02d-%02d",
-                    year,
-                    month.toInt() - 1,
-                    day.toInt() - 7 + 30
-                ) else String.format(
-                    "%s-%02d-%02d",
-                    year,
-                    month.toInt(),
-                    day.toInt() - 7
-                )
+                if (day.toInt() - 6 < 0) {
+                    String.format(
+                        "%s-%02d-%02d",
+                        year,
+                        month.toInt() - 1,
+                        day.toInt() - 6 + 30,
+                    )
+                } else {
+                    String.format(
+                        "%s-%02d-%02d",
+                        year,
+                        month.toInt(),
+                        day.toInt() - 6,
+                    )
+                }
             viewModel.fetchStatistic(preDate)
             viewModel.fetchFeedBack(preDate)
         }
@@ -79,17 +83,21 @@ class ChartFragment : BindingFragment<FragmentChartBinding>(R.layout.fragment_ch
             val day = selectedDate[2]
 
             val preDate =
-                if (day.toInt() + 7 > 30) String.format(
-                    "%s-%02d-%02d",
-                    year,
-                    month.toInt() + 1,
-                    day.toInt() + 7 - 30
-                ) else String.format(
-                    "%s-%02d-%02d",
-                    year,
-                    month.toInt(),
-                    day.toInt() + 7
-                )
+                if (day.toInt() + 6 > 30) {
+                    String.format(
+                        "%s-%02d-%02d",
+                        year,
+                        month.toInt() + 1,
+                        day.toInt() + 6 - 30,
+                    )
+                } else {
+                    String.format(
+                        "%s-%02d-%02d",
+                        year,
+                        month.toInt(),
+                        day.toInt() + 6,
+                    )
+                }
             viewModel.fetchStatistic(preDate)
             viewModel.fetchFeedBack(preDate)
         }
@@ -102,7 +110,7 @@ class ChartFragment : BindingFragment<FragmentChartBinding>(R.layout.fragment_ch
                     String.format(
                         getString(R.string.chart_title),
                         feedBackContent.month,
-                        feedBackContent.week
+                        feedBackContent.week,
                     )
             }
         }.launchIn(lifecycleScope)
