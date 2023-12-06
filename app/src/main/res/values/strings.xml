@@ -67,6 +67,7 @@
     <string name="chart_statistic_achievement_rate_des"><![CDATA[지난주에 비해 <font color="#5FCA7B">%s</font> 더 달성 했어요!]]></string>
     <string name="chart_statistic_category_des"><![CDATA[이번주에는 <font color="#5FCA7B">%s</font>를 가장 많이 했어요!]]></string>
     <string name="chart_statistic_fail_tag_des"><![CDATA[이번주 TODO 실패의 가장 큰 요인은 <font color="#FF2868">%s</font>이에요]]></string>
+    <string name="chart_title">%d월 %d주차 통계/피드백</string>
 
     <!--  failTag  -->
     <string name="my_fail_tag_title">나만의 실패 태그 만들기</string>

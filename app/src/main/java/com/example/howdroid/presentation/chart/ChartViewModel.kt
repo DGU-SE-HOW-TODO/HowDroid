@@ -17,6 +17,8 @@ import javax.inject.Inject
 class ChartViewModel @Inject constructor(
     private val chartRepository: ChartRepository
 ) : ViewModel() {
+    private val _selectedDate = MutableStateFlow("")
+    val selectedDate get() = _selectedDate.asStateFlow()
     private val _preToDoAchievementRate = MutableStateFlow(0)
     val preToDoAchievementRate get() = _preToDoAchievementRate.asStateFlow()
     private val _nowToDoAchievementRate = MutableStateFlow(0)
@@ -41,16 +43,17 @@ class ChartViewModel @Inject constructor(
     val feedBackContent get() = _feedBackContent.asStateFlow()
 
     init {
-        fetchStatistic()
-        fetchFeedBack()
+        val today = LocalDate.now().toString()
+        fetchStatistic(today)
+        fetchFeedBack(today)
     }
 
     // TODO 초기화 유사한 거 끼리 함수화
-    private fun fetchStatistic() {
-        val today = LocalDate.now()
+    fun fetchStatistic(selectedDate: String) {
         viewModelScope.launch {
-            chartRepository.fetchStatistic(today.toString())
+            chartRepository.fetchStatistic(selectedDate)
                 .onSuccess { chartInfo ->
+                    _selectedDate.value = chartInfo.selectedDate
                     val prePercent =
                         chartInfo.prevTodoDoneCnt.toFloat() / chartInfo.prevTodoCnt.toFloat() * 100
                     val nowPercent =
@@ -62,8 +65,8 @@ class ChartViewModel @Inject constructor(
                     _rateOfChange.value = chartInfo.rateOfChange
                     _nowCategoryRateList.value = chartInfo.nowCategoryDate.toMutableList()
                     _nowFailTagList.value = chartInfo.nowFailtagList.toMutableList()
-                    _nowBestCategory.value = chartInfo.nowBestCategory
-                    _nowWorstFailTag.value = chartInfo.nowWorstFailtag
+                    _nowBestCategory.value = chartInfo.nowBestCategory.toString()
+                    _nowWorstFailTag.value = chartInfo.nowWorstFailtag.toString()
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable.message)
@@ -71,10 +74,9 @@ class ChartViewModel @Inject constructor(
         }
     }
 
-    private fun fetchFeedBack() {
-        val today = LocalDate.now().toString()
+    fun fetchFeedBack(selectedDate: String) {
         viewModelScope.launch {
-            chartRepository.fetchFeedBack(today)
+            chartRepository.fetchFeedBack(selectedDate)
                 .onSuccess { feedBackContent ->
                     _feedBackContent.value = feedBackContent
                 }
