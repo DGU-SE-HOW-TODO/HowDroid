@@ -2,7 +2,7 @@
 
 
 ##  *****✅  HOW TO DO*****
-할 일을 기록하고 수행여부를 관리하며 일주일 치 피드백을 제공해 주는 TODO 앱
+할 일을 기록하고 수행 여부를 실패 태그와 함께 관리하며 동기부여와 피드백을 제공해 주는 TODO 서비스
 
 <br>
 
@@ -18,14 +18,6 @@
 
 <br>
 
-
-## 📷 *****ScreenShot*****
-| <img width="200" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/92192694-bc3d-4628-9cad-595794e84c01"/> | <img width="200" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/77060011/01280110-9e78-4834-86dc-2067279b61d2"/> | <img width="200" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/103172971/0ed223d3-55d3-496d-b982-8ccf0e704ffa"/> | <img width="200" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/103172971/204919dc-1a60-4c78-8629-566e7df9775d"/> | 
-| :---: | :---: | :---: |:------------------------------------------------------------------------------------------------------------------------------:|
-|`SignUpView`|`FilterView`|`HomeView`|                                                        `BakeryListView`                                                        |
-| <img width="200" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/103172971/4bb009ca-d000-49e0-a5b8-e4cb76f35abe"/> | <img width="200" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/103172971/5a1794c5-b2af-49af-ab96-108dd6f55e68"/> | <img width="200" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/103172971/86e31fdc-e2b0-4531-821d-901f85544b7d"/> |<img width="200" src="https://github.com/GEON-PPANG/GEON-PPANG-AOS/assets/103172971/6885d69a-532f-478b-9e3d-55f2f6c14e9a">
-|`SearchView`|`DetailView`|`ReviewWritingView`|`MyPageView`|
-
 <br>
 
 ## 📘 *****Convention*****
@@ -34,6 +26,7 @@
 <br>
 
 [코드 컨벤션이 궁금하다면? click ✔️](https://large-leo-019.notion.site/Android-Coding-Convention-cf0a6a75b6ab49e181af63c57a6e551e?pvs=4)
+
 <br>
 
 ## 👩🏻‍💻 ***Specification***
