@@ -1,13 +1,13 @@
 package com.example.howdroid.presentation.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.howdroid.R
 import com.example.howdroid.databinding.FragmentBottomPutFaillTagBinding
+import com.example.howdroid.util.ChipFactory
 import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingBottomSheetDialogFragment
 import com.google.android.material.chip.Chip
@@ -24,6 +24,8 @@ class PutFailTagBottomSheetFragment :
     private val failTagViewModel: PutFailTagViewModel by activityViewModels()
     lateinit var myFailTagList: MutableList<String>
     lateinit var selectedDate: String
+    private val String.toChip: Chip
+        get() = ChipFactory.create(layoutInflater)
     var toDoId: Int = -1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,14 +42,9 @@ class PutFailTagBottomSheetFragment :
 
     // TODO configuration change 될 때 칩 중복 생성되는 에러 해결
     private fun setMyFailTag() {
-        val inflater = LayoutInflater.from(requireContext())
+        binding.cgPutFailTag.removeAllViews()
         for (failTagName in myFailTagList) {
-            val chip = inflater.inflate(
-                R.layout.view_fail_tag_chip,
-                binding.cgPutFailTag,
-                false,
-            ) as Chip
-            chip.apply {
+            val chip = failTagName.toChip.apply {
                 id = View.generateViewId()
                 text = String.format("# %s", failTagName)
             }

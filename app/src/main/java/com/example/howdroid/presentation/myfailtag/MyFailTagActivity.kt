@@ -1,14 +1,15 @@
 package com.example.howdroid.presentation.myfailtag
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.howdroid.R
 import com.example.howdroid.databinding.ActivityMyFailTagBinding
+import com.example.howdroid.presentation.home.HomeFragment
 import com.example.howdroid.presentation.type.FailTagType
+import com.example.howdroid.util.ChipFactory
 import com.example.howdroid.util.UiState
 import com.example.howdroid.util.binding.BindingActivity
 import com.example.howdroid.util.extension.setOnSingleClickListener
@@ -20,6 +21,10 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MyFailTagActivity : BindingActivity<ActivityMyFailTagBinding>(R.layout.activity_my_fail_tag) {
     private val viewModel: MyFailTagViewModel by viewModels()
+    private val list = mutableListOf<String>()
+    private val String.toChip: Chip
+        get() = ChipFactory.create(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,12 +35,12 @@ class MyFailTagActivity : BindingActivity<ActivityMyFailTagBinding>(R.layout.act
     }
 
     private fun addListeners() {
-        val list = mutableListOf<String>()
+        val selectedDate = intent.extras?.getString(HomeFragment.SELECTED_DATE).toString()
         binding.btnCompleteMyFailTag.setOnClickListener {
             for (i in binding.chipGroupMyFailTag.checkedChipIds) {
                 list.add(getString(FailTagType.values().get(i - 1).titleRes))
             }
-            viewModel.setMyFailTag(list)
+            viewModel.setMyFailTag(list, selectedDate)
         }
     }
 
@@ -60,6 +65,7 @@ class MyFailTagActivity : BindingActivity<ActivityMyFailTagBinding>(R.layout.act
         }
 
         viewModel.isSetFailTagSuccess.flowWithLifecycle(lifecycle).onEach {
+            list.clear()
             when (it) {
                 is UiState.Success -> finish()
                 else -> {}
@@ -68,14 +74,8 @@ class MyFailTagActivity : BindingActivity<ActivityMyFailTagBinding>(R.layout.act
     }
 
     private fun setMyFailTag() {
-        val inflater = LayoutInflater.from(this)
         for (i in FailTagType.values()) {
-            val chip = inflater.inflate(
-                R.layout.view_fail_tag_chip,
-                binding.chipGroupMyFailTag,
-                false,
-            ) as Chip
-            chip.apply {
+            val chip = getString(i.titleRes).toChip.apply {
                 id = View.generateViewId() // 각 Chip에 고유한 ID 부여, TS
                 text = String.format("# %s", getString(i.titleRes))
             }

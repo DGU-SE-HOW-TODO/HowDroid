@@ -5,6 +5,7 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
@@ -17,6 +18,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.howdroid.R
+import com.example.howdroid.data.datasource.local.HowDroidStorage
 import com.example.howdroid.databinding.FragmentHomeBinding
 import com.example.howdroid.domain.model.home.Home
 import com.example.howdroid.util.UiState
@@ -52,6 +54,11 @@ class HomeFragment :
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        fetchHome()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addListeners()
@@ -61,6 +68,8 @@ class HomeFragment :
         setupTouchEvents()
         refreshHome()
         collectData()
+
+        Log.d("aaa", "${HowDroidStorage(requireContext()).accessToken}")
     }
 
     private fun refreshHome() {
@@ -77,6 +86,7 @@ class HomeFragment :
                 homeViewModel.postCategory(categoryName)
                 fetchHome()
                 requireContext().hideKeyboard(binding.root)
+                binding.clHomeAddCategory.setVisible(GONE)
                 true
             } else {
                 false
@@ -97,7 +107,8 @@ class HomeFragment :
 
     private fun addListeners() {
         binding.ivHomeToolbarFailtag.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_myFailTagActivity)
+            val bundle = putDataToBundle()
+            findNavController().navigate(R.id.action_navigation_home_to_myFailTagActivity, bundle)
         }
         binding.weeklyCalendar.setOnWeeklyDayClickListener { _, date ->
             homeViewModel.setSelectedDate(date.toString())
@@ -172,6 +183,7 @@ class HomeFragment :
                     binding.rvOuterHomeTodoList.adapter = outerAdapter
                     outerAdapter.submitList(uiState.data.todoCategoryData)
                     setHomeTitle(uiState.data.rateOfSuccess)
+                    scrollToTop()
                 }
 
                 else -> Unit
@@ -214,6 +226,12 @@ class HomeFragment :
     override fun onDestroyView() {
         binding.rvOuterHomeTodoList.adapter = null
         super.onDestroyView()
+    }
+
+    private fun scrollToTop() {
+        binding.rvOuterHomeTodoList.post {
+            binding.rvOuterHomeTodoList.smoothScrollToPosition(0)
+        }
     }
 
     companion object {

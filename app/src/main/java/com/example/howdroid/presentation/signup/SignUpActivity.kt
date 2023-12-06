@@ -81,7 +81,7 @@ class SignUpActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_
                 }
 
                 is UiState.Failure -> {
-                    showSnackbar(binding.root, getString(R.string.signup_email_duplication_fail))
+                    showSnackbar(binding.root, "서버 연결 실패")
                 }
 
                 else -> Unit
@@ -102,6 +102,7 @@ class SignUpActivity : BindingActivity<ActivitySignupBinding>(R.layout.activity_
             handleUiState(uiState, emailTextView)
             if (uiState !is UiState.Success) {
                 binding.tvSignupEmailDuplicationSuccess.setVisible(INVISIBLE)
+                binding.tvSignupEmailDuplication.setVisible(INVISIBLE)
             }
         }
         signUpViewModel.nickNameData.observe(this) { handleUiState(it, nickNameTextView) }
