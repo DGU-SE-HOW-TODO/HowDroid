@@ -1,5 +1,6 @@
 package com.example.howdroid.presentation.chart
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Html
@@ -100,7 +101,7 @@ class ChartStatisticFragment :
                 setDrawGridLines(false)
                 granularity = 1f
                 setDrawAxisLine(false)
-                textSize = 13f
+                textSize = 10f
                 typeface = Typeface.DEFAULT_BOLD
             }
 
@@ -108,6 +109,7 @@ class ChartStatisticFragment :
                 isEnabled = false
                 axisMinimum = 0f
                 axisMaximum = 100f
+                textColor = Color.BLACK
             }
             axisRight.run {
                 isEnabled = false
