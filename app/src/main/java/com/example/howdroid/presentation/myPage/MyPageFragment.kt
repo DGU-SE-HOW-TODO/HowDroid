@@ -6,7 +6,7 @@ import com.example.howdroid.R
 import com.example.howdroid.databinding.FragmentMyPageBinding
 import com.example.howdroid.util.binding.BindingFragment
 
-class MyPageFragment: BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
+class MyPageFragment : BindingFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
