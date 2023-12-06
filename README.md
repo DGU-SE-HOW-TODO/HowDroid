@@ -10,7 +10,7 @@
 
 | [@l2zh](https://github.com/l2zh) | [@Dani43](https://github.com/Dan2dani) |
 | :---: | :---: |
-| ![image](https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/f7c6aa82-938e-4a9b-ac0d-78280ea43ddd) | ![image](https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/ce69010b-2c1e-4e19-929c-f154c0e742b5)|
+| ![image](https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/0949efe9-94ff-4b32-975f-690c7bfe6642) | ![image](https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/ce69010b-2c1e-4e19-929c-f154c0e742b5)|
 |                                                    `AuthView`, `HomeView`, </br> `ToDoMakeView`                                             |`FailTagView`, `StatisticsView`, <br>`FeedBackView`|
 
 
