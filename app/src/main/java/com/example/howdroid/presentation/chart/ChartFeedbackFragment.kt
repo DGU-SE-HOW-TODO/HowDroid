@@ -3,6 +3,7 @@ package com.example.howdroid.presentation.chart
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -28,45 +29,50 @@ class ChartFeedbackFragment :
         collectData()
     }
 
+    // TODO 범위에 따라 함수화
     private fun collectData() {
-        viewModel.feedBackContent.flowWithLifecycle(lifecycle).onEach { feedBackContent ->
-            with(binding) {
-                binding.tvFeedbackTitle.text = String.format("%d주차 피드백", feedBackContent?.week)
-                if (feedBackContent?.rateMessage != null) {
-                    feedBackContent.also {
-                        tvChartRateTitle.text = it.rateMessage
-                        tvChartRateDes.text = it.rateDetailMessage
+        viewModel.feedBackContent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { feedBackContent ->
+                with(binding) {
+                    binding.tvFeedbackTitle.text = String.format("%d주차 피드백", feedBackContent?.week)
+                    binding.layoutFeedbackRate.isVisible = feedBackContent?.rateMessage != null
+                    binding.layoutFeedbackPriority.isVisible = feedBackContent?.priorityMessage != null
+                    binding.layoutFeedbackDelayed.isVisible = feedBackContent?.delayMessage != null
+                    if (feedBackContent?.rateMessage != null) {
+                        feedBackContent.also {
+                            tvChartRateTitle.text = it.rateMessage
+                            tvChartRateDes.text = it.rateDetailMessage
+                        }
+                        tvChartRateTitle.text = feedBackContent.rateMessage
+                        tvChartRateDes.text = feedBackContent.rateDetailMessage
                     }
-                    tvChartRateTitle.text = feedBackContent.rateMessage
-                    tvChartRateDes.text = feedBackContent.rateDetailMessage
+                    if (feedBackContent?.priorityMessage != null) {
+                        tvChartPriorityTitle.text = feedBackContent.priorityMessage
+                        tvChartPriorityDes.text = feedBackContent.priorityDetailMessage
+                    }
+                    if (feedBackContent?.delayMessage != null) {
+                        tvChartDelayedTitle.text = feedBackContent.delayMessage
+                        tvChartDelayedDes.text = feedBackContent.delayDetailMessage
+                    }
                 }
-                if (feedBackContent?.priorityMessage != null) {
-                    barChartPriorityRate.visibility = View.VISIBLE
-                    tvChartPriorityTitle.text = feedBackContent.priorityMessage
-                    tvChartPriorityDes.text = feedBackContent.priorityDetailMessage
-                }
-                if (feedBackContent?.delayMessage != null) {
-                    tvChartDelayedTitle.text = feedBackContent.delayMessage
-                    tvChartDelayedDes.text = feedBackContent.delayDetailMessage
-                }
-            }
 
-            val priorityRateChart: BarChart = binding.barChartPriorityRate
-            val totalPercent = feedBackContent?.let {
-                it.firstPriPercent + it.secondPriPercent + it.thirdPriPercent
-            }
-            val barList =
-                if (feedBackContent != null && totalPercent != null) {
-                    setPriorityRateData(
-                        feedBackContent.firstPriPercent.toFloat() / totalPercent.toFloat() * 100,
-                        feedBackContent.secondPriPercent.toFloat() / totalPercent.toFloat() * 100,
-                        feedBackContent.thirdPriPercent.toFloat() / totalPercent.toFloat() * 100
-                    )
-                } else {
-                    return@onEach
+                val priorityRateChart: BarChart = binding.barChartPriorityRate
+                val totalPercent = feedBackContent?.let {
+                    it.firstPriPercent + it.secondPriPercent + it.thirdPriPercent
                 }
-            setPriorityRateBarChart(priorityRateChart, barList!!)
-        }.launchIn(lifecycleScope)
+                val barList =
+                    if (feedBackContent != null && totalPercent != null) {
+                        setPriorityRateData(
+                            feedBackContent.firstPriPercent.toFloat() / totalPercent.toFloat() * 100,
+                            feedBackContent.secondPriPercent.toFloat() / totalPercent.toFloat() * 100,
+                            feedBackContent.thirdPriPercent.toFloat() / totalPercent.toFloat() * 100
+                        )
+                    } else {
+                        return@onEach
+                    }
+                // TODO !! 수정
+                setPriorityRateBarChart(priorityRateChart, barList!!)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun setPriorityRateBarChart(barChart: BarChart, barList: ArrayList<BarEntry>) {
