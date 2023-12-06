@@ -3,7 +3,7 @@ package com.example.howdroid.presentation.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.example.howdroid.R
@@ -21,7 +21,7 @@ class PutFailTagBottomSheetFragment :
         R.layout.fragment_bottom_put_faill_tag,
     ) {
 
-    private val failTagViewModel: PutFailTagViewModel by viewModels()
+    private val failTagViewModel: PutFailTagViewModel by activityViewModels()
     lateinit var myFailTagList: MutableList<String>
     lateinit var selectedDate: String
     var toDoId: Int = -1
@@ -58,7 +58,6 @@ class PutFailTagBottomSheetFragment :
     private fun addListeners() {
         binding.btnCompletePutFailTag.setOnClickListener {
             failTagViewModel.putFailTag(toDoId)
-            dismiss()
         }
         binding.cbPutFailTagDelayTillTomorrow.setOnClickListener {
             failTagViewModel.setIsDelayedTomorrow()
