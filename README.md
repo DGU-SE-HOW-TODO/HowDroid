@@ -12,8 +12,15 @@
 | :---: | :---: |
 | ![image](https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/0949efe9-94ff-4b32-975f-690c7bfe6642) | ![image](https://github.com/DGU-SE-HOW-TODO/HowDroid/assets/113578158/ce69010b-2c1e-4e19-929c-f154c0e742b5)|
 |                                                    `AuthView`, `HomeView`, </br> `ToDoMakeView`                                             |`FailTagView`, `StatisticsView`, <br>`FeedBackView`|
+                                                
 
+## 📱*****ScreenShot*****
 
+| <img width="200" src=""/> | <img width="200" src=""/> | <img width="200" src=""/> | <img width="200" src=""/> | 
+| :---: | :---: | :---: |:------------------------------------------------------------------------------------------------------------------------------:|
+|`회원가입, 로그인`|`대분류 생성`|`투두 생성`|                                                        `투두 체크`                                                        |
+| <img width="200" src=""/> | <img width="200" src=""/> | <img width="200" src=""/> | <img width="200" src="">
+|`나만의 실패태그 만들기`|`실태패그 달기, 미루기`|`투두 고정`|`통계/피드백`| 
 
 
 <br>
